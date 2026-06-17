@@ -8,6 +8,11 @@
     "monthsPerYear": 12,
     "years": ["2083/84", "2084/85", "2085/86", "2086/87", "2087/88"]
   },
+  "census2078": {
+    "totalHouseholds": 6666937,
+    "label": "National Population and Housing Census 2078",
+    "sourceUrl": "https://censusnepal.cbs.gov.np/Home/Index/EN"
+  },
   "reports": [
     {
       "id": "huma_kumari_karki_25263",

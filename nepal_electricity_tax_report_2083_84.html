@@ -15,6 +15,10 @@ body { margin: 0; background: #F7F8FA; color: #1F2933; font-family: Arial, Helve
 .rpt-title { font-size: 20px; font-weight: 500; color: var(--color-text-primary, #1F2933); margin: 0 0 4px; }
 .rpt-sub { font-size: 13px; color: var(--color-text-secondary, #5E6B78); margin: 0; }
 .report-picker { min-width: 260px; border: 0.5px solid var(--color-border-secondary, #B8C2CC); border-radius: var(--border-radius-md, 6px); background: var(--color-background-primary, #FFFFFF); color: var(--color-text-primary, #1F2933); padding: 8px 10px; font: inherit; font-size: 13px; }
+.view-nav { display: inline-flex; gap: 4px; background: #E8EEF4; border: 0.5px solid var(--color-border-tertiary, #D8DEE6); border-radius: var(--border-radius-md, 6px); padding: 4px; margin: 0 0 1rem; }
+.view-tab { border: 0; border-radius: 4px; background: transparent; color: var(--color-text-secondary, #5E6B78); cursor: pointer; font: inherit; font-size: 13px; padding: 8px 12px; }
+.view-tab[aria-selected="true"] { background: #FFFFFF; color: var(--color-text-primary, #1F2933); box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08); }
+.view-panel[hidden] { display: none; }
 .info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1rem; }
 .info-card { background: var(--color-background-secondary, #FFFFFF); border: 0.5px solid var(--color-border-tertiary, #D8DEE6); border-radius: var(--border-radius-md, 6px); padding: 10px 14px; }
 .info-label { font-size: 11px; color: var(--color-text-secondary, #5E6B78); margin-bottom: 2px; letter-spacing: 0.5px; text-transform: uppercase; }
@@ -47,12 +51,21 @@ table.rpt tr:last-child td { border-bottom: none; }
 .proj-total-lbl { font-size: 13px; font-weight: 500; }
 .proj-total-amt { font-size: 22px; font-weight: 500; white-space: nowrap; }
 .note-box { background: var(--color-background-secondary, #FFFFFF); border: 0.5px solid var(--color-border-tertiary, #D8DEE6); border-radius: var(--border-radius-md, 6px); padding: 12px 16px; margin-top: 1rem; font-size: 12px; color: var(--color-text-secondary, #5E6B78); line-height: 1.7; }
+.mini-note { font-size: 12px; color: var(--color-text-secondary, #5E6B78); line-height: 1.6; margin: -6px 0 14px; }
+.mini-note a { color: #185FA5; font-weight: 500; text-decoration: underline; text-underline-offset: 2px; }
+.chart-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr); gap: 14px; }
+.chart-box { min-height: 280px; position: relative; }
+.analysis-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.analysis-list li { border-bottom: 0.5px solid var(--color-border-tertiary, #D8DEE6); color: var(--color-text-primary, #1F2933); font-size: 13px; line-height: 1.55; padding: 0 0 8px; }
+.analysis-list li:last-child { border-bottom: none; padding-bottom: 0; }
 .yr-table td, .yr-table th { padding: 7px 10px; }
 .error-box { display: none; border-color: #D96262; color: #791F1F; background: #FCEBEB; }
 @media (max-width: 760px) {
   .rpt-head-row, .proj-row { display: block; }
+  .view-nav { display: flex; width: 100%; }
+  .view-tab { flex: 1; }
   .report-picker { width: 100%; margin-top: 1rem; min-width: 0; }
-  .info-grid, .stat-row { grid-template-columns: 1fr; }
+  .info-grid, .stat-row, .chart-grid { grid-template-columns: 1fr; }
   .proj-box + .proj-box { margin-top: 12px; }
 }
 </style>
@@ -68,17 +81,20 @@ table.rpt tr:last-child td { border-bottom: none; }
     <div>
       <p class="rpt-tag">Government of Nepal &mdash; Nepal Electricity Authority</p>
       <h1 class="rpt-title">Electricity Tax Contribution Report</h1>
-      <p class="rpt-sub">FY 2083/84 Assessment &amp; 5-Year Projection &nbsp;&bull;&nbsp; Calculation A / B / C</p>
+      <p class="rpt-sub">FY 2083/84 Assessment &amp; 5-Year Projection &nbsp;&bull;&nbsp; Calculation A (Individual)</p>
     </div>
-    <div style="display:flex; flex-direction:column; gap:8px;">
-      <select class="report-picker" id="datasetSelect" aria-label="Select JSON dataset file"></select>
-      <select class="report-picker" id="reportSelect" aria-label="Select bill screenshot report"></select>
-    </div>
+    <select class="report-picker" id="reportSelect" aria-label="Select bill screenshot report"></select>
   </div>
 </div>
 
 <div class="note-box error-box" id="errorBox"></div>
 
+<nav class="view-nav" aria-label="Report sections">
+  <button class="view-tab" id="individualTab" type="button" data-view="individualView" aria-controls="individualView" aria-selected="true">Individual Assessment</button>
+  <button class="view-tab" id="overallTab" type="button" data-view="overallView" aria-controls="overallView" aria-selected="false">Overall Evaluation</button>
+</nav>
+
+<div class="view-panel" id="individualView" role="tabpanel" aria-labelledby="individualTab">
 <div class="info-grid">
   <div class="info-card"><div class="info-label">Consumer name</div><div class="info-val" id="consumerName">-</div></div>
   <div class="info-card"><div class="info-label">SC number</div><div class="info-val" id="scNumber">-</div></div>
@@ -172,15 +188,64 @@ table.rpt tr:last-child td { border-bottom: none; }
 </div>
 
 <div class="note-box" id="notesBox"></div>
+</div>
+
+<div class="view-panel" id="overallView" role="tabpanel" aria-labelledby="overallTab" hidden>
+<div class="section">
+  <p class="sec-head"><i class="ti ti-chart-dots" aria-hidden="true"></i> &nbsp;Overall evaluation summary</p>
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-label">Calculable consumers</div>
+      <div class="stat-val" id="overallConsumers">-</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Mean 5-year / consumer</div>
+      <div class="stat-val" id="overallMeanConsumer">-</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Mean Nepal 5-year total</div>
+      <div class="stat-val" id="overallMeanNational">-</div>
+    </div>
+  </div>
+  <ul class="analysis-list" id="overallAnalysis" style="margin-top:1rem;"></ul>
+</div>
+
+<div class="section">
+  <p class="sec-head"><i class="ti ti-chart-bar" aria-hidden="true"></i> &nbsp;5-year plan comparison charts</p>
+  <div class="chart-grid">
+    <div class="chart-box">
+      <canvas id="nationalBarChart" role="img" aria-label="Bar chart comparing Nepal 5-year total by consumer"></canvas>
+    </div>
+    <div class="chart-box">
+      <canvas id="nationalShareChart" role="img" aria-label="Doughnut chart showing share of sample 5-year total by consumer"></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <p class="sec-head"><i class="ti ti-home-stats" aria-hidden="true"></i> &nbsp;Nepal household estimate &mdash; Census 2078</p>
+  <p class="mini-note" id="censusNote"></p>
+  <table class="rpt">
+    <thead>
+      <tr>
+        <th>Consumer</th><th>Annual tax / consumer</th><th>5-year tax / consumer</th><th>Nepal annual total</th><th>Nepal 5-year total</th>
+      </tr>
+    </thead>
+    <tbody id="nationalBody"></tbody>
+  </table>
+</div>
+</div>
 
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
+const DATA_URL = "./electricity_bill_reports.json";
 const TARGET_MONTHS = ["magh", "falgun", "chaitra", "baisakh"];
-const AVERAGE_ID = "__average__";
 let reportData = null;
 let billChart = null;
+let nationalBarChart = null;
+let nationalShareChart = null;
 
 function money(value, decimals = 0) {
   return "Rs " + Number(value || 0).toLocaleString(undefined, {
@@ -221,49 +286,6 @@ function orderedFourMonthBills(report) {
     .filter(Boolean);
 }
 
-function buildAverageReport(reports) {
-  const bills = TARGET_MONTHS.map(monthKey => {
-    let unitsSum = 0, unitsCount = 0, billSum = 0, billCount = 0, paidSum = 0, paidCount = 0;
-    let billMonthLabel = null;
-    reports.forEach(report => {
-      const bill = report.bills.find(item => item.monthKey === monthKey);
-      if (!bill) return;
-      if (!billMonthLabel) billMonthLabel = bill.billMonth;
-      if (hasUnits(bill)) { unitsSum += Number(bill.units); unitsCount += 1; }
-      if (bill.billAmount !== undefined && bill.billAmount !== null) { billSum += Number(bill.billAmount); billCount += 1; }
-      const paid = bill.paidAmount ?? bill.payableAmount ?? bill.billAmount;
-      if (paid !== undefined && paid !== null) { paidSum += Number(paid); paidCount += 1; }
-    });
-    return {
-      monthKey,
-      billMonth: billMonthLabel || monthKey,
-      billDate: "",
-      units: unitsCount ? Math.round((unitsSum / unitsCount) * 10) / 10 : null,
-      billAmount: billCount ? Math.round(billSum / billCount) : 0,
-      rebateLabel: "Average across consumers",
-      payableAmount: paidCount ? Math.round(paidSum / paidCount) : 0,
-      paidAmount: paidCount ? Math.round(paidSum / paidCount) : 0
-    };
-  });
-
-  const familyMembers = reports.length
-    ? Math.round((reports.reduce((sum, report) => sum + Number(report.familyMembers || 0), 0) / reports.length) * 10) / 10
-    : 0;
-
-  return {
-    id: AVERAGE_ID,
-    screenshotFile: "",
-    consumerName: `Average of all (${reports.length} consumers)`,
-    scNumber: "",
-    consumerId: "",
-    neaLocation: "Multiple locations",
-    district: "Multiple districts",
-    familyMembers,
-    connectionType: "Mixed",
-    bills
-  };
-}
-
 function rebateClass(label) {
   const text = String(label || "").toLowerCase();
   if (text.includes("penalty")) return "pill-red";
@@ -279,10 +301,71 @@ function hasUnits(bill) {
   return bill.units !== null && bill.units !== undefined && bill.units !== "";
 }
 
+function taxProjectionForBills(bills, taxRules, projection) {
+  const calculableBills = bills.filter(hasUnits);
+  if (!calculableBills.length) return null;
+
+  const monthlyTotals = calculableBills.reduce((totals, bill) => {
+    const units = Number(bill.units);
+    const energy = totalEnergy(units);
+    const taxable = taxableEnergy(units);
+    totals.vat += taxable * (taxRules.vatRatePct / 100);
+    totals.duty += energy * (taxRules.developmentSurchargePct / 100);
+    return totals;
+  }, { vat: 0, duty: 0 });
+
+  const avgVAT = monthlyTotals.vat / calculableBills.length;
+  const avgDuty = monthlyTotals.duty / calculableBills.length;
+  const annVAT = avgVAT * projection.monthsPerYear;
+  const annDuty = avgDuty * projection.monthsPerYear;
+  const annTotal = annVAT + annDuty;
+  const fiveTotal = annTotal * projection.years.length;
+
+  return {
+    monthsUsed: calculableBills.length,
+    avgVAT,
+    avgDuty,
+    annVAT,
+    annDuty,
+    annTotal,
+    fiveTotal
+  };
+}
+
+function nationalEvaluationRows(taxRules, projection) {
+  const totalHouseholds = Number(reportData.census2078?.totalHouseholds || 0);
+  const calculableRows = [];
+  const missingRows = [];
+
+  reportData.reports.forEach(report => {
+    const projectionTotals = taxProjectionForBills(orderedFourMonthBills(report), taxRules, projection);
+
+    if (!projectionTotals || !totalHouseholds) {
+      missingRows.push({
+        consumerName: report.consumerName,
+        consumerId: report.consumerId
+      });
+      return;
+    }
+
+    const annualNational = projectionTotals.annTotal * totalHouseholds;
+    const fiveNational = projectionTotals.fiveTotal * totalHouseholds;
+    calculableRows.push({
+      consumerName: report.consumerName,
+      consumerId: report.consumerId,
+      annualConsumer: projectionTotals.annTotal,
+      fiveConsumer: projectionTotals.fiveTotal,
+      annualNational,
+      fiveNational
+    });
+  });
+
+  calculableRows.sort((a, b) => a.fiveNational - b.fiveNational);
+  return { calculableRows, missingRows };
+}
+
 function renderReport(reportId) {
-  const report = reportId === AVERAGE_ID
-    ? buildAverageReport(reportData.reports)
-    : (reportData.reports.find(item => item.id === reportId) || reportData.reports[0]);
+  const report = reportData.reports.find(item => item.id === reportId) || reportData.reports[0];
   const bills = orderedFourMonthBills(report);
   const monthsUsed = bills.length || 1;
   const familyMembers = Number(report.familyMembers || 0);
@@ -364,6 +447,7 @@ function renderReport(reportId) {
   setText("unitsPerPerson", familyMembers && unitMonths ? `${number((totalUnits / unitMonths) / familyMembers, 1)} kWh` : "Not provided");
 
   renderTaxTables(bills, taxRules, projection);
+  renderNationalHouseholdEstimate(taxRules, projection);
   renderChart(bills);
   renderNotes(report, taxRules);
 }
@@ -429,12 +513,8 @@ function renderTaxTables(bills, taxRules, projection) {
     tbody.appendChild(row);
   });
 
-  const monthsUsed = calculableBills.length;
-  const avgVAT = totalVAT / monthsUsed;
-  const avgDuty = totalDuty / monthsUsed;
-  const annVAT = avgVAT * projection.monthsPerYear;
-  const annDuty = avgDuty * projection.monthsPerYear;
-  const annTotal = annVAT + annDuty;
+  const projectionTotals = taxProjectionForBills(bills, taxRules, projection);
+  const { avgVAT, avgDuty, annVAT, annDuty, annTotal } = projectionTotals;
 
   const averageRow = document.createElement("tr");
   averageRow.className = "tfoot";
@@ -479,6 +559,183 @@ function renderTaxTables(bills, taxRules, projection) {
     <td style="font-weight:500; color:var(--color-text-warning)">${money(Math.round(annTotal * totalYears))}</td>
   `;
   yrBody.appendChild(totalYearRow);
+}
+
+function renderNationalHouseholdEstimate(taxRules, projection) {
+  const census = reportData.census2078 || {};
+  const totalHouseholds = Number(census.totalHouseholds || 0);
+  const nationalBody = document.getElementById("nationalBody");
+  nationalBody.innerHTML = "";
+  const { calculableRows, missingRows } = nationalEvaluationRows(taxRules, projection);
+
+  const householdText = number(totalHouseholds);
+  const householdSource = census.sourceUrl
+    ? `<a href="${census.sourceUrl}" target="_blank" rel="noopener noreferrer">${householdText}</a>`
+    : householdText;
+  document.getElementById("censusNote").innerHTML =
+    `Based on ${householdSource} total households from ${census.label || "Census 2078"}. Each row scales that consumer's annual and 5-year tax pattern to all households in Nepal.`;
+
+  calculableRows.forEach(rowData => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td><strong>${rowData.consumerName}</strong><br><span class="pill pill-blue">${rowData.consumerId || "No ID"}</span></td>
+      <td>${money(Math.round(rowData.annualConsumer))}</td>
+      <td>${money(Math.round(rowData.fiveConsumer))}</td>
+      <td style="font-weight:500">${money(Math.round(rowData.annualNational))}</td>
+      <td style="font-weight:500">${money(Math.round(rowData.fiveNational))}</td>
+    `;
+    nationalBody.appendChild(row);
+  });
+
+  missingRows.forEach(rowData => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td><strong>${rowData.consumerName}</strong><br><span class="pill pill-gray">${rowData.consumerId || "No ID"}</span></td>
+      <td colspan="4"><span class="pill pill-gray">Not enough unit data to calculate 1-year and 5-year totals.</span></td>
+    `;
+    nationalBody.appendChild(row);
+  });
+
+  if (!calculableRows.length) {
+    const emptyRow = document.createElement("tr");
+    emptyRow.innerHTML = `
+      <td colspan="5"><span class="pill pill-gray">Add consumed units for at least one consumer to calculate the sample mean.</span></td>
+    `;
+    nationalBody.appendChild(emptyRow);
+    renderOverallEvaluation(calculableRows, missingRows);
+    return;
+  }
+
+  const mean = calculableRows.reduce((totals, row) => {
+    totals.annualConsumer += row.annualConsumer;
+    totals.fiveConsumer += row.fiveConsumer;
+    totals.annualNational += row.annualNational;
+    totals.fiveNational += row.fiveNational;
+    return totals;
+  }, { annualConsumer: 0, fiveConsumer: 0, annualNational: 0, fiveNational: 0 });
+  const divisor = calculableRows.length;
+
+  const meanRow = document.createElement("tr");
+  meanRow.className = "tfoot";
+  meanRow.innerHTML = `
+    <td><strong>Mean of ${divisor} calculable consumers</strong></td>
+    <td><strong>${money(Math.round(mean.annualConsumer / divisor))}</strong></td>
+    <td><strong>${money(Math.round(mean.fiveConsumer / divisor))}</strong></td>
+    <td><strong>${money(Math.round(mean.annualNational / divisor))}</strong></td>
+    <td><strong>${money(Math.round(mean.fiveNational / divisor))}</strong></td>
+  `;
+  nationalBody.appendChild(meanRow);
+  renderOverallEvaluation(calculableRows, missingRows, mean);
+}
+
+function renderOverallEvaluation(calculableRows, missingRows, meanTotals = null) {
+  const divisor = calculableRows.length || 1;
+  const mean = meanTotals || { annualConsumer: 0, fiveConsumer: 0, annualNational: 0, fiveNational: 0 };
+  const lowest = calculableRows[0];
+  const highest = calculableRows[calculableRows.length - 1];
+  const spread = highest && lowest ? highest.fiveNational - lowest.fiveNational : 0;
+
+  setText("overallConsumers", `${calculableRows.length} of ${reportData.reports.length}`);
+  setText("overallMeanConsumer", calculableRows.length ? money(Math.round(mean.fiveConsumer / divisor)) : "Not enough data");
+  setText("overallMeanNational", calculableRows.length ? money(Math.round(mean.fiveNational / divisor)) : "Not enough data");
+
+  const analysis = document.getElementById("overallAnalysis");
+  if (!calculableRows.length) {
+    analysis.innerHTML = `<li>Add consumed units for at least one consumer to generate an overall evaluation.</li>`;
+    renderNationalCharts([]);
+    return;
+  }
+
+  analysis.innerHTML = `
+    <li><strong>Lowest projected 5-year plan:</strong> ${lowest.consumerName} at ${money(Math.round(lowest.fiveNational))} when scaled to all Census 2078 households.</li>
+    <li><strong>Highest projected 5-year plan:</strong> ${highest.consumerName} at ${money(Math.round(highest.fiveNational))}, mainly because the household's monthly consumption is much higher than the other samples.</li>
+    <li><strong>Sample mean:</strong> the average 5-year Nepal-wide projection is ${money(Math.round(mean.fiveNational / divisor))}, while the average 5-year tax per consumer is ${money(Math.round(mean.fiveConsumer / divisor))}.</li>
+    <li><strong>Variation:</strong> the difference between the highest and lowest Nepal 5-year projections is ${money(Math.round(spread))}, so the estimate is sensitive to which household pattern is used.</li>
+    <li><strong>Data coverage:</strong> ${missingRows.length} consumer${missingRows.length === 1 ? "" : "s"} could not be included because units were not visible in the bill screenshot.</li>
+  `;
+
+  renderNationalCharts(calculableRows);
+}
+
+function renderNationalCharts(rows) {
+  const barCanvas = document.getElementById("nationalBarChart");
+  const shareCanvas = document.getElementById("nationalShareChart");
+
+  if (typeof Chart === "undefined") {
+    [barCanvas, shareCanvas].forEach(canvas => {
+      canvas.style.display = "none";
+      const wrap = canvas.parentElement;
+      let fallback = wrap.querySelector(".chartFallback");
+      if (!fallback) {
+        fallback = document.createElement("div");
+        fallback.className = "note-box chartFallback";
+        fallback.style.marginTop = "0";
+        wrap.appendChild(fallback);
+      }
+      fallback.textContent = "Chart library could not load. The evaluation table and analysis are still available.";
+    });
+    return;
+  }
+
+  [barCanvas, shareCanvas].forEach(canvas => {
+    canvas.style.display = "block";
+    const fallback = canvas.parentElement.querySelector(".chartFallback");
+    if (fallback) fallback.remove();
+  });
+
+  if (nationalBarChart) nationalBarChart.destroy();
+  if (nationalShareChart) nationalShareChart.destroy();
+
+  const labels = rows.map(row => row.consumerName.replace(" (My Household)", ""));
+  const values = rows.map(row => Math.round(row.fiveNational));
+  const colors = ["#185FA5", "#BA7517", "#437A2A", "#7A4C9E", "#A43D3D"];
+
+  nationalBarChart = new Chart(barCanvas, {
+    type: "bar",
+    data: {
+      labels,
+      datasets: [{
+        label: "Nepal 5-year total (Rs)",
+        data: values,
+        backgroundColor: "#185FA5",
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { callbacks: { label: context => money(context.parsed.y) } }
+      },
+      scales: {
+        y: { title: { display: true, text: "Rs" }, ticks: { callback: value => number(value) } },
+        x: { ticks: { font: { size: 11 } } }
+      }
+    }
+  });
+
+  nationalShareChart = new Chart(shareCanvas, {
+    type: "doughnut",
+    data: {
+      labels,
+      datasets: [{
+        data: values,
+        backgroundColor: colors.slice(0, rows.length),
+        borderColor: "#FFFFFF",
+        borderWidth: 2
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: "bottom", labels: { boxWidth: 12, font: { size: 11 } } },
+        tooltip: { callbacks: { label: context => `${context.label}: ${money(context.parsed)}` } }
+      },
+      cutout: "62%"
+    }
+  });
 }
 
 function renderChart(bills) {
@@ -559,86 +816,55 @@ function renderNotes(report, taxRules) {
     &bull; Source record: ${report.consumerName || "consumer"}, Consumer ID ${report.consumerId || "not provided"}, ${report.neaLocation || "NEA location not provided"}.<br>
     &bull; Screenshot file: ${report.screenshotFile || "Not provided"}.<br>
     &bull; Connection type: ${report.connectionType || "Not provided"}.<br>
+    &bull; Nepal household estimate uses ${number(reportData.census2078?.totalHouseholds || 0)} total households from Census 2078 and averages only consumers with visible unit data.<br>
     &bull; New ${taxRules.vatRatePct}% VAT applies above the first ${taxRules.vatExemptUnits} units/month; ${taxRules.developmentSurchargePct}% electricity development surcharge is projected on calculated energy charge.<br>
     &bull; Projections assume the same 4-month average consumption pattern for future months.${missingUnitsNote}
   `;
 }
 
+function showView(viewId) {
+  document.querySelectorAll(".view-panel").forEach(panel => {
+    panel.hidden = panel.id !== viewId;
+  });
+  document.querySelectorAll(".view-tab").forEach(tab => {
+    tab.setAttribute("aria-selected", String(tab.dataset.view === viewId));
+  });
+
+  if (viewId === "overallView") {
+    setTimeout(() => {
+      if (nationalBarChart) nationalBarChart.resize();
+      if (nationalShareChart) nationalShareChart.resize();
+    }, 0);
+  }
+}
+
+function setupViewTabs() {
+  document.querySelectorAll(".view-tab").forEach(tab => {
+    tab.addEventListener("click", () => showView(tab.dataset.view));
+  });
+}
+
 function populateReportPicker() {
   const select = document.getElementById("reportSelect");
-  const individualOptions = reportData.reports
+  select.innerHTML = reportData.reports
     .map(report => `<option value="${report.id}">${report.consumerName} (${report.consumerId || "no ID"})</option>`)
     .join("");
-  const averageOption = reportData.reports.length > 1
-    ? `<option value="${AVERAGE_ID}">★ Average of all (${reportData.reports.length} consumers)</option>`
-    : "";
-  select.innerHTML = individualOptions + averageOption;
-  select.onchange = event => renderReport(event.target.value);
-}
-
-async function loadDataset(fileUrl) {
-  const response = await fetch(fileUrl);
-  if (!response.ok) throw new Error(`Could not load ${fileUrl}`);
-  reportData = await response.json();
-  populateReportPicker();
-  renderReport(reportData.reports[0].id);
-}
-
-function populateDatasetPicker(manifest) {
-  const select = document.getElementById("datasetSelect");
-  select.innerHTML = manifest
-    .map(item => `<option value="${item.file}">${item.label || item.file}</option>`)
-    .join("");
-  select.onchange = event => loadDataset(event.target.value).catch(showLoadError);
-}
-
-function showLoadError(error) {
-  const errorBox = document.getElementById("errorBox");
-  errorBox.style.display = "block";
-  errorBox.textContent = `Unable to load bill data. Run this page through a local web server so JSON files can be fetched. (${error.message})`;
-  console.error(error);
-}
-
-function labelFromFilename(file) {
-  const base = file.replace(/^.*\//, "").replace(/\.json$/i, "");
-  return base
-    .replace(/[_-]+/g, " ")
-    .replace(/\b\w/g, ch => ch.toUpperCase());
-}
-
-async function discoverJsonFiles() {
-  const response = await fetch("./");
-  if (!response.ok) throw new Error("Directory listing not available");
-  const html = await response.text();
-  const doc = new DOMParser().parseFromString(html, "text/html");
-  const files = Array.from(doc.querySelectorAll("a"))
-    .map(a => a.getAttribute("href") || "")
-    .map(href => decodeURIComponent(href.split("?")[0]))
-    .filter(href => href.toLowerCase().endsWith(".json"))
-    .map(href => href.replace(/^\.?\//, ""))
-    .filter(href => !href.includes("/"))
-    .filter(file => file.toLowerCase() !== "datasets.json");
-
-  const unique = Array.from(new Set(files));
-  if (!unique.length) throw new Error("No JSON files found in directory listing");
-  return unique.map(file => ({ file, label: labelFromFilename(file) }));
+  select.addEventListener("change", event => renderReport(event.target.value));
 }
 
 async function init() {
-  let manifest;
   try {
-    manifest = await discoverJsonFiles();
+    const response = await fetch(DATA_URL);
+    if (!response.ok) throw new Error(`Could not load ${DATA_URL}`);
+    reportData = await response.json();
+    setupViewTabs();
+    populateReportPicker();
+    renderReport(reportData.reports[0].id);
   } catch (error) {
-    showLoadError(new Error("Could not list JSON files automatically. Serve this folder with a web server that supports directory listing (e.g. `python3 -m http.server`) and open it via http://, not file://."));
+    const errorBox = document.getElementById("errorBox");
+    errorBox.style.display = "block";
+    errorBox.textContent = `Unable to load bill data from ${DATA_URL}. Run this page through a local web server so the separate JSON file can be fetched.`;
     console.error(error);
-    return;
-  }
-
-  populateDatasetPicker(manifest);
-  try {
-    await loadDataset(manifest[0].file);
-  } catch (error) {
-    showLoadError(error);
   }
 }
 
