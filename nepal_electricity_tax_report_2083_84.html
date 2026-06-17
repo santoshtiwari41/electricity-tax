@@ -6,59 +6,66 @@
 <title>Electricity Tax Contribution Report</title>
 
 <style>
-body { margin: 0; background: #F7F8FA; color: #1F2933; font-family: Arial, Helvetica, sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; background: #EEF2F7; color: #1F2933; font-family: "Segoe UI", Roboto, Arial, Helvetica, sans-serif; }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
-.rpt-wrap { max-width: 1180px; margin: 0 auto; font-family: var(--font-sans, Arial, Helvetica, sans-serif); padding: 1rem; }
-.rpt-header { background: var(--color-background-secondary, #FFFFFF); border: 0.5px solid var(--color-border-tertiary, #D8DEE6); border-radius: var(--border-radius-lg, 8px); padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+.rpt-wrap { max-width: 1180px; margin: 0 auto; font-family: var(--font-sans, "Segoe UI", Roboto, Arial, Helvetica, sans-serif); padding: 1.5rem 1rem 2.5rem; }
+.rpt-header { background: linear-gradient(135deg, #154677 0%, #185FA5 100%); border-radius: var(--border-radius-lg, 10px); padding: 1.5rem 1.75rem; margin-bottom: 1.25rem; box-shadow: 0 6px 18px rgba(15, 60, 110, 0.18); }
 .rpt-head-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
-.rpt-tag { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--color-text-secondary, #5E6B78); margin-bottom: 4px; }
-.rpt-title { font-size: 20px; font-weight: 500; color: var(--color-text-primary, #1F2933); margin: 0 0 4px; }
-.rpt-sub { font-size: 13px; color: var(--color-text-secondary, #5E6B78); margin: 0; }
-.report-picker { min-width: 260px; border: 0.5px solid var(--color-border-secondary, #B8C2CC); border-radius: var(--border-radius-md, 6px); background: var(--color-background-primary, #FFFFFF); color: var(--color-text-primary, #1F2933); padding: 8px 10px; font: inherit; font-size: 13px; }
-.view-nav { display: inline-flex; gap: 4px; background: #E8EEF4; border: 0.5px solid var(--color-border-tertiary, #D8DEE6); border-radius: var(--border-radius-md, 6px); padding: 4px; margin: 0 0 1rem; }
-.view-tab { border: 0; border-radius: 4px; background: transparent; color: var(--color-text-secondary, #5E6B78); cursor: pointer; font: inherit; font-size: 13px; padding: 8px 12px; }
-.view-tab[aria-selected="true"] { background: #FFFFFF; color: var(--color-text-primary, #1F2933); box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08); }
+.rpt-tag { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: #BFD9F2; margin-bottom: 6px; }
+.rpt-title { font-size: 24px; font-weight: 600; color: #FFFFFF; margin: 0 0 6px; }
+.rpt-sub { font-size: 13px; color: #DCE9F8; margin: 0; }
+.report-picker { min-width: 220px; border: 1px solid rgba(255,255,255,0.35); border-radius: var(--border-radius-md, 6px); background: rgba(255,255,255,0.12); color: #FFFFFF; padding: 9px 12px; font: inherit; font-size: 13px; cursor: pointer; }
+.report-picker option { color: #1F2933; }
+.report-picker:hover { background: rgba(255,255,255,0.2); }
+.view-nav { display: inline-flex; gap: 4px; background: #E1E8F0; border: 0.5px solid var(--color-border-tertiary, #D8DEE6); border-radius: var(--border-radius-md, 8px); padding: 4px; margin: 0 0 1.25rem; }
+.view-tab { border: 0; border-radius: 6px; background: transparent; color: #50607A; cursor: pointer; font: inherit; font-size: 13px; font-weight: 500; padding: 9px 16px; transition: background 0.15s ease, color 0.15s ease; }
+.view-tab:hover { color: #185FA5; }
+.view-tab[aria-selected="true"] { background: #185FA5; color: #FFFFFF; box-shadow: 0 2px 6px rgba(24, 95, 165, 0.3); }
 .view-panel[hidden] { display: none; }
-.info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1rem; }
-.info-card { background: var(--color-background-secondary, #FFFFFF); border: 0.5px solid var(--color-border-tertiary, #D8DEE6); border-radius: var(--border-radius-md, 6px); padding: 10px 14px; }
-.info-label { font-size: 11px; color: var(--color-text-secondary, #5E6B78); margin-bottom: 2px; letter-spacing: 0.5px; text-transform: uppercase; }
-.info-val { font-size: 14px; font-weight: 500; color: var(--color-text-primary, #1F2933); }
-.section { background: var(--color-background-primary, #FFFFFF); border: 0.5px solid var(--color-border-tertiary, #D8DEE6); border-radius: var(--border-radius-lg, 8px); padding: 1.25rem 1.5rem; margin-bottom: 1rem; overflow-x: auto; }
-.sec-head { font-size: 13px; font-weight: 500; color: var(--color-text-secondary, #5E6B78); margin: 0 0 14px; letter-spacing: 1px; text-transform: uppercase; }
+.info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 1.25rem; }
+.info-card { background: var(--color-background-secondary, #FFFFFF); border: 0.5px solid var(--color-border-tertiary, #D8DEE6); border-radius: var(--border-radius-md, 8px); padding: 12px 14px; box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05); }
+.info-label { font-size: 11px; color: var(--color-text-secondary, #5E6B78); margin-bottom: 3px; letter-spacing: 0.5px; text-transform: uppercase; }
+.info-val { font-size: 14px; font-weight: 600; color: var(--color-text-primary, #1F2933); }
+.section { background: var(--color-background-primary, #FFFFFF); border: 0.5px solid var(--color-border-tertiary, #D8DEE6); border-radius: var(--border-radius-lg, 10px); padding: 1.4rem 1.6rem; margin-bottom: 1.25rem; overflow-x: auto; box-shadow: 0 1px 4px rgba(15, 23, 42, 0.05); }
+.sec-head { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: #185FA5; margin: 0 0 16px; letter-spacing: 0.8px; text-transform: uppercase; padding-bottom: 10px; border-bottom: 1px solid #EEF2F7; }
+.sec-icon { font-size: 15px; line-height: 1; }
 table.rpt { width: 100%; border-collapse: collapse; font-size: 13px; }
-table.rpt th { padding: 8px 10px; text-align: left; font-size: 11px; font-weight: 500; color: var(--color-text-secondary, #5E6B78); border-bottom: 0.5px solid var(--color-border-tertiary, #D8DEE6); letter-spacing: 0.5px; text-transform: uppercase; }
-table.rpt td { padding: 8px 10px; color: var(--color-text-primary, #1F2933); border-bottom: 0.5px solid var(--color-border-tertiary, #D8DEE6); }
+table.rpt th { padding: 9px 10px; text-align: left; font-size: 11px; font-weight: 600; color: var(--color-text-secondary, #5E6B78); border-bottom: 2px solid var(--color-border-tertiary, #D8DEE6); letter-spacing: 0.5px; text-transform: uppercase; }
+table.rpt td { padding: 9px 10px; color: var(--color-text-primary, #1F2933); border-bottom: 0.5px solid var(--color-border-tertiary, #D8DEE6); }
+table.rpt tbody tr:hover td { background: #F4F8FC; }
 table.rpt tr:last-child td { border-bottom: none; }
-.tfoot td { background: var(--color-background-secondary, #F1F5F9); font-weight: 500; }
-.pill { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 12px; font-weight: 500; white-space: nowrap; }
+.tfoot td { background: var(--color-background-secondary, #F1F5F9); font-weight: 600; }
+.tfoot:hover td { background: var(--color-background-secondary, #F1F5F9) !important; }
+.pill { display: inline-block; padding: 3px 9px; border-radius: 20px; font-size: 12px; font-weight: 600; white-space: nowrap; }
 .pill-blue { background: #E6F1FB; color: #0C447C; }
 .pill-amber { background: #FAEEDA; color: #633806; }
 .pill-green { background: #EAF3DE; color: #27500A; }
 .pill-red { background: #FCEBEB; color: #791F1F; }
 .pill-gray { background: #F1EFE8; color: #444441; }
-.stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 1rem; }
-.stat-card { background: var(--color-background-secondary, #F1F5F9); border-radius: var(--border-radius-md, 6px); padding: 12px 14px; }
-.stat-label { font-size: 11px; color: var(--color-text-secondary, #5E6B78); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
-.stat-val { font-size: 20px; font-weight: 500; color: var(--color-text-primary, #1F2933); }
-.proj-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.proj-box { border: 0.5px solid var(--color-border-tertiary, #D8DEE6); border-radius: var(--border-radius-lg, 8px); padding: 1.25rem; }
-.proj-yr { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--color-text-secondary, #5E6B78); margin-bottom: 12px; }
-.proj-row2 { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 6px 0; border-bottom: 0.5px solid var(--color-border-tertiary, #D8DEE6); }
+.stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 1.1rem; }
+.stat-card { background: #F4F8FC; border: 0.5px solid #E1EAF3; border-radius: var(--border-radius-md, 8px); padding: 14px 16px; }
+.stat-label { font-size: 11px; color: var(--color-text-secondary, #5E6B78); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 5px; }
+.stat-val { font-size: 21px; font-weight: 600; color: #185FA5; }
+.proj-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.proj-box { border: 0.5px solid var(--color-border-tertiary, #D8DEE6); border-radius: var(--border-radius-lg, 10px); padding: 1.4rem; background: #FAFCFE; }
+.proj-yr { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--color-text-secondary, #5E6B78); margin-bottom: 14px; font-weight: 600; }
+.proj-row2 { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 7px 0; border-bottom: 0.5px solid var(--color-border-tertiary, #D8DEE6); }
 .proj-row2:last-of-type { border-bottom: none; }
 .proj-lbl { font-size: 13px; color: var(--color-text-secondary, #5E6B78); }
-.proj-amt { font-size: 14px; font-weight: 500; color: var(--color-text-primary, #1F2933); white-space: nowrap; }
-.proj-total { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 10px; padding-top: 10px; border-top: 0.5px solid var(--color-border-secondary, #B8C2CC); }
-.proj-total-lbl { font-size: 13px; font-weight: 500; }
-.proj-total-amt { font-size: 22px; font-weight: 500; white-space: nowrap; }
-.note-box { background: var(--color-background-secondary, #FFFFFF); border: 0.5px solid var(--color-border-tertiary, #D8DEE6); border-radius: var(--border-radius-md, 6px); padding: 12px 16px; margin-top: 1rem; font-size: 12px; color: var(--color-text-secondary, #5E6B78); line-height: 1.7; }
-.mini-note { font-size: 12px; color: var(--color-text-secondary, #5E6B78); line-height: 1.6; margin: -6px 0 14px; }
-.mini-note a { color: #185FA5; font-weight: 500; text-decoration: underline; text-underline-offset: 2px; }
-.chart-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr); gap: 14px; }
+.proj-amt { font-size: 14px; font-weight: 600; color: var(--color-text-primary, #1F2933); white-space: nowrap; }
+.proj-total { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--color-border-secondary, #B8C2CC); }
+.proj-total-lbl { font-size: 13px; font-weight: 600; }
+.proj-total-amt { font-size: 24px; font-weight: 700; white-space: nowrap; }
+.note-box { background: #F4F8FC; border: 0.5px solid var(--color-border-tertiary, #D8DEE6); border-radius: var(--border-radius-md, 8px); padding: 14px 18px; margin-top: 1.1rem; font-size: 12.5px; color: var(--color-text-secondary, #5E6B78); line-height: 1.8; }
+.mini-note { font-size: 12.5px; color: var(--color-text-secondary, #5E6B78); line-height: 1.6; margin: -6px 0 14px; }
+.mini-note a { color: #185FA5; font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
+.chart-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.65fr); gap: 16px; }
 .chart-box { min-height: 280px; position: relative; }
-.analysis-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
-.analysis-list li { border-bottom: 0.5px solid var(--color-border-tertiary, #D8DEE6); color: var(--color-text-primary, #1F2933); font-size: 13px; line-height: 1.55; padding: 0 0 8px; }
+.analysis-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.analysis-list li { border-bottom: 0.5px solid var(--color-border-tertiary, #D8DEE6); color: var(--color-text-primary, #1F2933); font-size: 13.5px; line-height: 1.6; padding: 0 0 10px; }
 .analysis-list li:last-child { border-bottom: none; padding-bottom: 0; }
-.yr-table td, .yr-table th { padding: 7px 10px; }
+.yr-table td, .yr-table th { padding: 8px 10px; }
 .error-box { display: none; border-color: #D96262; color: #791F1F; background: #FCEBEB; }
 @media (max-width: 760px) {
   .rpt-head-row, .proj-row { display: block; }
@@ -108,7 +115,7 @@ table.rpt tr:last-child td { border-bottom: none; }
 </div>
 
 <div class="section">
-  <p class="sec-head"><i class="ti ti-file-invoice" aria-hidden="true"></i> &nbsp;4-month bill summary (Magh, Falgun, Chaitra, Baisakh)</p>
+  <p class="sec-head"><span class="sec-icon" aria-hidden="true">🧾</span>4-month bill summary (Magh, Falgun, Chaitra, Baisakh)</p>
   <table class="rpt">
     <thead>
       <tr>
@@ -135,14 +142,14 @@ table.rpt tr:last-child td { border-bottom: none; }
 </div>
 
 <div class="section">
-  <p class="sec-head"><i class="ti ti-chart-bar" aria-hidden="true"></i> &nbsp;Monthly consumption pattern</p>
+  <p class="sec-head"><span class="sec-icon" aria-hidden="true">📊</span>Monthly consumption pattern</p>
   <div style="position:relative; width:100%; height:200px;">
     <canvas id="billChart" role="img" aria-label="Bar chart of monthly electricity units consumed"></canvas>
   </div>
 </div>
 
 <div class="section">
-  <p class="sec-head"><i class="ti ti-receipt-tax" aria-hidden="true"></i> &nbsp;Tax calculation &mdash; FY 2083/84 projection</p>
+  <p class="sec-head"><span class="sec-icon" aria-hidden="true">💰</span>Tax calculation &mdash; FY 2083/84 projection</p>
   <p id="taxRuleNote" style="font-size:12px; color:var(--color-text-secondary); margin: -8px 0 14px;"></p>
   <table class="rpt">
     <thead>
@@ -155,7 +162,7 @@ table.rpt tr:last-child td { border-bottom: none; }
 </div>
 
 <div class="section">
-  <p class="sec-head"><i class="ti ti-building-bank" aria-hidden="true"></i> &nbsp;Tax contributed to Government of Nepal (GoN)</p>
+  <p class="sec-head"><span class="sec-icon" aria-hidden="true">🏛️</span>Tax contributed to Government of Nepal (GoN)</p>
   <div class="proj-row">
     <div class="proj-box">
       <div class="proj-yr">FY 2083/84 &mdash; annual estimate</div>
@@ -195,7 +202,7 @@ table.rpt tr:last-child td { border-bottom: none; }
 
 <div class="view-panel" id="overallView" role="tabpanel" aria-labelledby="overallTab" hidden>
 <div class="section">
-  <p class="sec-head"><i class="ti ti-chart-dots" aria-hidden="true"></i> &nbsp;Overall evaluation summary</p>
+  <p class="sec-head"><span class="sec-icon" aria-hidden="true">📈</span>Overall evaluation summary</p>
   <div class="stat-row">
     <div class="stat-card">
       <div class="stat-label">Calculable consumers</div>
@@ -214,7 +221,7 @@ table.rpt tr:last-child td { border-bottom: none; }
 </div>
 
 <div class="section">
-  <p class="sec-head"><i class="ti ti-chart-bar" aria-hidden="true"></i> &nbsp;5-year plan comparison charts</p>
+  <p class="sec-head"><span class="sec-icon" aria-hidden="true">📊</span>5-year plan comparison charts</p>
   <div class="chart-grid">
     <div class="chart-box">
       <canvas id="nationalBarChart" role="img" aria-label="Bar chart comparing Nepal 5-year total by consumer"></canvas>
@@ -226,7 +233,7 @@ table.rpt tr:last-child td { border-bottom: none; }
 </div>
 
 <div class="section">
-  <p class="sec-head"><i class="ti ti-home-stats" aria-hidden="true"></i> &nbsp;Nepal household estimate &mdash; Census 2078</p>
+  <p class="sec-head"><span class="sec-icon" aria-hidden="true">🏠</span>Nepal household estimate &mdash; Census 2078</p>
   <p class="mini-note" id="censusNote"></p>
   <table class="rpt">
     <thead>
@@ -250,6 +257,7 @@ const DATASET_FILES = [
   { file: "santosh.json", label: "Santosh" }
 ];
 const TARGET_MONTHS = ["magh", "falgun", "chaitra", "baisakh"];
+const AVERAGE_ID = "__average__";
 let reportData = null;
 let billChart = null;
 let nationalBarChart = null;
@@ -372,8 +380,56 @@ function nationalEvaluationRows(taxRules, projection) {
   return { calculableRows, missingRows };
 }
 
+function buildAverageReport() {
+  const reports = reportData.reports;
+  const bills = TARGET_MONTHS.map(monthKey => {
+    const monthBills = reports
+      .map(report => report.bills.find(bill => bill.monthKey === monthKey))
+      .filter(bill => bill && hasUnits(bill));
+
+    if (!monthBills.length) {
+      return { monthKey, billMonth: monthKey, units: null, billAmount: 0, paidAmount: 0, payableAmount: 0, rebateLabel: "No data" };
+    }
+
+    const divisor = monthBills.length;
+    const avgUnits = monthBills.reduce((sum, bill) => sum + Number(bill.units), 0) / divisor;
+    const avgBillAmount = monthBills.reduce((sum, bill) => sum + Number(bill.billAmount || 0), 0) / divisor;
+    const avgPaidAmount = monthBills.reduce((sum, bill) => sum + Number(bill.paidAmount ?? bill.payableAmount ?? bill.billAmount ?? 0), 0) / divisor;
+
+    return {
+      monthKey,
+      billMonth: monthBills[0].billMonth,
+      units: avgUnits,
+      billAmount: avgBillAmount,
+      paidAmount: avgPaidAmount,
+      payableAmount: avgPaidAmount,
+      rebateLabel: "Average"
+    };
+  });
+
+  const familyMembersList = reports.map(report => Number(report.familyMembers || 0)).filter(n => n > 0);
+  const avgFamilyMembers = familyMembersList.length
+    ? Math.round(familyMembersList.reduce((sum, n) => sum + n, 0) / familyMembersList.length)
+    : 0;
+
+  return {
+    id: AVERAGE_ID,
+    consumerName: `Average of all (${reports.length} consumers)`,
+    scNumber: "—",
+    consumerId: "—",
+    neaLocation: "Multiple",
+    district: "Multiple",
+    familyMembers: avgFamilyMembers,
+    connectionType: "Mixed",
+    screenshotFile: "",
+    bills
+  };
+}
+
 function renderReport(reportId) {
-  const report = reportData.reports.find(item => item.id === reportId) || reportData.reports[0];
+  const report = reportId === AVERAGE_ID
+    ? buildAverageReport()
+    : (reportData.reports.find(item => item.id === reportId) || reportData.reports[0]);
   const bills = orderedFourMonthBills(report);
   const monthsUsed = bills.length || 1;
   const familyMembers = Number(report.familyMembers || 0);
@@ -854,9 +910,13 @@ function setupViewTabs() {
 
 function populateReportPicker() {
   const select = document.getElementById("reportSelect");
-  select.innerHTML = reportData.reports
+  const individualOptions = reportData.reports
     .map(report => `<option value="${report.id}">${report.consumerName} (${report.consumerId || "no ID"})</option>`)
     .join("");
+  const averageOption = reportData.reports.length > 1
+    ? `<option value="${AVERAGE_ID}">★ Average of all (${reportData.reports.length} consumers)</option>`
+    : "";
+  select.innerHTML = individualOptions + averageOption;
   select.onchange = event => renderReport(event.target.value);
 }
 
