@@ -1,0 +1,284 @@
+{
+  "taxRules": {
+    "vatRatePct": 5,
+    "vatExemptUnits": 50,
+    "developmentSurchargePct": 1.5
+  },
+  "projection": {
+    "monthsPerYear": 12,
+    "years": [
+      "2083/84",
+      "2084/85",
+      "2085/86",
+      "2086/87",
+      "2087/88"
+    ]
+  },
+  "reports": [
+    {
+      "id": "Ambika Pokhrel",
+      "screenshotFile": "NA",
+      "consumerName": "Ambika Pokhrel",
+      "scNumber": "NA",
+      "consumerId": "NA",
+      "neaLocation": "Baneshwor DC",
+      "district": "Kathmandu",
+      "familyMembers": 5,
+      "connectionType": "NA",
+      "bills": [
+        {
+          "monthKey": "falgun",
+          "billMonth": "Falgun/2082",
+          "billDate": "NA",
+          "units": 329,
+          "billAmount": 3294,
+          "rebateLabel": "-165",
+          "payableAmount": 3459,
+          "paidAmount": "3459"
+        },
+        {
+          "monthKey": "chaitra",
+          "billMonth": "Chaitra/2082",
+          "billDate": "NA",
+          "units": 234,
+          "billAmount": 2222,
+          "rebateLabel": "-223",
+          "payableAmount": 2445,
+          "paidAmount": "2445"
+        },
+        {
+          "monthKey": "baisakh",
+          "billMonth": "Baisakh/2082",
+          "billDate": "NA",
+          "units": 171,
+          "billAmount": 1625,
+          "rebateLabel": "-0",
+          "payableAmount": 1625,
+          "paidAmount": "1625"
+        },
+        {
+          "monthKey": "jestha",
+          "billMonth": "Jestha/2082",
+          "billDate": "NA",
+          "units": 240,
+          "billAmount": 2278,
+          "rebateLabel": "-0",
+          "payableAmount": 2278,
+          "paidAmount": "2278"
+        }
+      ]
+    },
+    {
+      "id": "Krishna Prasad Dhakal",
+      "screenshotFile": "NA",
+      "consumerName": "Krishna Prasad Dhakal",
+      "scNumber": "NA",
+      "consumerId": "NA",
+      "neaLocation": "Hetauda DC",
+      "district": "Makawanpur",
+      "familyMembers": 11,
+      "connectionType": "NA",
+      "bills": [
+        {
+          "monthKey": "falgun",
+          "billMonth": "Falgun/2082",
+          "billDate": "NA",
+          "units": 199,
+          "billAmount": 1891,
+          "rebateLabel": "-0",
+          "payableAmount": 1891,
+          "paidAmount": "1891"
+        },
+        {
+          "monthKey": "chaitra",
+          "billMonth": "Chaitra/2082",
+          "billDate": "NA",
+          "units": 206,
+          "billAmount": 1955,
+          "rebateLabel": "-0",
+          "payableAmount": 1955,
+          "paidAmount": "1955"
+        },
+        {
+          "monthKey": "baisakh",
+          "billMonth": "Baisakh/2082",
+          "billDate": "NA",
+          "units": 231,
+          "billAmount": 2195,
+          "rebateLabel": "-0",
+          "payableAmount": 2195,
+          "paidAmount": "2195"
+        },
+        {
+          "monthKey": "jestha",
+          "billMonth": "Jestha/2082",
+          "billDate": "NA",
+          "units": 247,
+          "billAmount": 2299,
+          "rebateLabel": "-0",
+          "payableAmount": 2299,
+          "paidAmount": "2299"
+        }
+      ]
+    },
+    {
+      "id": "Shashi Khatiwada",
+      "screenshotFile": "NA",
+      "consumerName": "Shashi Khatiwada",
+      "scNumber": "NA",
+      "consumerId": "NA",
+      "neaLocation": "Maharajgunj DC",
+      "district": "Kathmandu",
+      "familyMembers": 8,
+      "connectionType": "NA",
+      "bills": [
+        {
+          "monthKey": "falgun",
+          "billMonth": "Falgun/2082",
+          "billDate": "NA",
+          "units": 210,
+          "billAmount": 1995,
+          "rebateLabel": "-200",
+          "payableAmount": 2195,
+          "paidAmount": "2195"
+        },
+        {
+          "monthKey": "chaitra",
+          "billMonth": "Chaitra/2082",
+          "billDate": "NA",
+          "units": 198,
+          "billAmount": 1880,
+          "rebateLabel": "-0",
+          "payableAmount": 1880,
+          "paidAmount": "1880"
+        },
+        {
+          "monthKey": "baisakh",
+          "billMonth": "Baisakh/2082",
+          "billDate": "NA",
+          "units": 176,
+          "billAmount": 1670,
+          "rebateLabel": "-84",
+          "payableAmount": 1754,
+          "paidAmount": "1754"
+        },
+        {
+          "monthKey": "jestha",
+          "billMonth": "Jestha/2082",
+          "billDate": "NA",
+          "units": 195,
+          "billAmount": 1853,
+          "rebateLabel": "-0",
+          "payableAmount": 1853,
+          "paidAmount": "1853"
+        }
+      ]
+    },
+    {
+      "id": "Hari Subedi",
+      "screenshotFile": "NA",
+      "consumerName": "Hari Subedi",
+      "scNumber": "NA",
+      "consumerId": "NA",
+      "neaLocation": "Balaju DC",
+      "district": "Kathmandu",
+      "familyMembers": 10,
+      "connectionType": "NA",
+      "bills": [
+        {
+          "monthKey": "falgun",
+          "billMonth": "Falgun/2082",
+          "billDate": "NA",
+          "units": 181,
+          "billAmount": 1720,
+          "rebateLabel": "-0",
+          "payableAmount": 1720,
+          "paidAmount": "1720"
+        },
+        {
+          "monthKey": "chaitra",
+          "billMonth": "Chaitra/2082",
+          "billDate": "NA",
+          "units": 180,
+          "billAmount": 1707,
+          "rebateLabel": "-0",
+          "payableAmount": 1707,
+          "paidAmount": "1707"
+        },
+        {
+          "monthKey": "baisakh",
+          "billMonth": "Baisakh/2082",
+          "billDate": "NA",
+          "units": 163,
+          "billAmount": 1549,
+          "rebateLabel": "-0",
+          "payableAmount": 1549,
+          "paidAmount": "1549"
+        },
+        {
+          "monthKey": "jestha",
+          "billMonth": "Jestha/2082",
+          "billDate": "NA",
+          "units": 186,
+          "billAmount": 1765,
+          "rebateLabel": "-0",
+          "payableAmount": 1765,
+          "paidAmount": "1765"
+        }
+      ]
+    },
+    {
+      "id": "Nihati Bhatta",
+      "screenshotFile": "NA",
+      "consumerName": "Nihati Bhatta",
+      "scNumber": "NA",
+      "consumerId": "NA",
+      "neaLocation": "Chabahil DC",
+      "district": "Kathmandu",
+      "familyMembers": 6,
+      "connectionType": "NA",
+      "bills": [
+        {
+          "monthKey": "falgun",
+          "billMonth": "Falgun/2082",
+          "billDate": "NA",
+          "units": 436,
+          "billAmount": 5000,
+          "rebateLabel": "-0",
+          "payableAmount": 5000,
+          "paidAmount": "5000"
+        },
+        {
+          "monthKey": "chaitra",
+          "billMonth": "Chaitra/2082",
+          "billDate": "NA",
+          "units": 435,
+          "billAmount": 4997,
+          "rebateLabel": "-0",
+          "payableAmount": 4997,
+          "paidAmount": "4997"
+        },
+        {
+          "monthKey": "baisakh",
+          "billMonth": "Baisakh/2082",
+          "billDate": "NA",
+          "units": 439,
+          "billAmount": 5041,
+          "rebateLabel": "-0",
+          "payableAmount": 5041,
+          "paidAmount": "5041"
+        },
+        {
+          "monthKey": "jestha",
+          "billMonth": "Jestha/2082",
+          "billDate": "NA",
+          "units": 454,
+          "billAmount": 5210,
+          "rebateLabel": "-0",
+          "payableAmount": 5210,
+          "paidAmount": "5210"
+        }
+      ]
+    }
+  ]
+}
