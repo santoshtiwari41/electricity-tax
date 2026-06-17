@@ -173,58 +173,58 @@
         }
       ]
     },
+  {
+  "id": "jagarnath_shah_2554",
+  "screenshotFile": "img/Screenshot From 2026-06-15 15-55-57.png",
+  "consumerName": "Jagarnath Shah",
+  "scNumber": "001.29.105",
+  "consumerId": "2554",
+  "neaLocation": "RANI SUB DC",
+  "district": "MORANG",
+  "familyMembers": 5,
+  "connectionType": "Estimated 5A domestic (assumed for slab calculation)",
+  "bills": [
     {
-      "id": "jagarnath_shah_2554",
-      "screenshotFile": "img/Screenshot From 2026-06-15 15-55-57.png",
-      "consumerName": "Jagarnath Shah",
-      "scNumber": "001.29.105",
-      "consumerId": "2554",
-      "neaLocation": "RANI SUB DC",
-      "district": "MORANG",
-      "familyMembers": 5,
-      "connectionType": "Not provided in screenshot",
-      "bills": [
-        {
-          "monthKey": "magh",
-          "billMonth": "Magh/2082",
-          "billDate": "12-FEB-26",
-          "units": null,
-          "billAmount": 220,
-          "rebateLabel": "No rebate or penalty",
-          "payableAmount": 220,
-          "paidAmount": 220
-        },
-        {
-          "monthKey": "falgun",
-          "billMonth": "Falgun/2082",
-          "billDate": "13-MAR-26",
-          "units": null,
-          "billAmount": 236,
-          "rebateLabel": "Rebate",
-          "payableAmount": 232,
-          "paidAmount": 232
-        },
-        {
-          "monthKey": "chaitra",
-          "billMonth": "Chaitra/2082",
-          "billDate": "12-APR-26",
-          "units": null,
-          "billAmount": 267,
-          "rebateLabel": "Rebate",
-          "payableAmount": 262,
-          "paidAmount": 262
-        },
-        {
-          "monthKey": "baisakh",
-          "billMonth": "Baisakh/2083",
-          "billDate": "12-MAY-26",
-          "units": null,
-          "billAmount": 991,
-          "rebateLabel": "Rebate",
-          "payableAmount": 972,
-          "paidAmount": 972
-        }
-      ]
+      "monthKey": "magh",
+      "billMonth": "Magh/2082",
+      "billDate": "12-FEB-26",
+      "units": 25,
+      "billAmount": 220,
+      "rebateLabel": "No rebate or penalty",
+      "payableAmount": 220,
+      "paidAmount": 220
+    },
+    {
+      "monthKey": "falgun",
+      "billMonth": "Falgun/2082",
+      "billDate": "13-MAR-26",
+      "units": 27,
+      "billAmount": 236,
+      "rebateLabel": "Rebate",
+      "payableAmount": 232,
+      "paidAmount": 232
+    },
+    {
+      "monthKey": "chaitra",
+      "billMonth": "Chaitra/2082",
+      "billDate": "12-APR-26",
+      "units": 30,
+      "billAmount": 267,
+      "rebateLabel": "Rebate",
+      "payableAmount": 262,
+      "paidAmount": 262
+    },
+    {
+      "monthKey": "baisakh",
+      "billMonth": "Baisakh/2083",
+      "billDate": "12-MAY-26",
+      "units": 105,
+      "billAmount": 991,
+      "rebateLabel": "Rebate",
+      "payableAmount": 972,
+      "paidAmount": 972
     }
+  ]
+}
   ]
 }
