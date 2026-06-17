@@ -225,6 +225,113 @@
       "paidAmount": 972
     }
   ]
-}
+},
+    {
+      "id": "pramila_khadge_8436",
+      "screenshotFile": "img/d1.png",
+      "consumerName": "Mrs. Pramila Khadge",
+      "scNumber": "309.18.054",
+      "consumerId": "8436",
+      "neaLocation": "MAHARAJGUNJ DC",
+      "district": "KATHMANDU",
+      "familyMembers": 5,
+      "connectionType": "Not provided in screenshot",
+      "bills": [
+        {
+          "monthKey": "magh",
+          "billMonth": "Magh/2082",
+          "billDate": "02-JAN-26",
+          "units": 208,
+          "billAmount": 1975,
+          "rebateLabel": "Penalty",
+          "payableAmount": 2074,
+          "paidAmount": 2074
+        },
+        {
+          "monthKey": "falgun",
+          "billMonth": "Falgun/2082",
+          "billDate": "01-FEB-26",
+          "units": 466,
+          "billAmount": 4801,
+          "rebateLabel": "Penalty",
+          "payableAmount": 5042,
+          "paidAmount": 5042
+        },
+        {
+          "monthKey": "chaitra",
+          "billMonth": "Chaitra/2082",
+          "billDate": "02-MAR-26",
+          "units": 245,
+          "billAmount": 2326,
+          "rebateLabel": "Rebate",
+          "payableAmount": 2280,
+          "paidAmount": 2280
+        },
+        {
+          "monthKey": "baisakh",
+          "billMonth": "Baisakh/2083",
+          "billDate": "01-MAY-26",
+          "units": 145,
+          "billAmount": 1376,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 1376,
+          "paidAmount": 1376
+        }
+      ]
+    },
+    {
+      "id": "narhari_acharya_258",
+      "screenshotFile": "img/d2.png",
+      "consumerName": "Narhari Acharya",
+      "scNumber": "214.04.060",
+      "consumerId": "258",
+      "neaLocation": "BALAJU DC",
+      "district": "KATHMANDU",
+      "familyMembers": 7,
+      "connectionType": "Not provided in screenshot",
+      "bills": [
+
+        {
+          "monthKey": "magh",
+          "billMonth": "Magh/2082",
+          "billDate": "18-JAN-26",
+          "units": 73,
+          "billAmount": 624,
+          "rebateLabel": "Rebate",
+          "payableAmount": 612,
+          "paidAmount": 612
+        },
+        {
+          "monthKey": "falgun",
+          "billMonth": "Falgun/2082",
+          "billDate": "16-FEB-26",
+          "units": 71,
+          "billAmount": 602,
+          "rebateLabel": "Rebate",
+          "payableAmount": 590,
+          "paidAmount": 590
+        },
+        {
+          "monthKey": "chaitra",
+          "billMonth": "Chaitra/2082",
+          "billDate": "18-MAR-26",
+          "units": 56,
+          "billAmount": 462,
+          "rebateLabel": "Penalty",
+          "payableAmount": 486,
+          "paidAmount": 486
+        },
+                {
+          "monthKey": "baisakh",
+          "billMonth": "Baisakh/2083",
+          "billDate": "17-MAY-26",
+          "units": 52,
+          "billAmount": 424,
+          "rebateLabel": "Penalty",
+          "payableAmount": 467,
+          "paidAmount": 467
+        }
+      ]
+    }
   ]
 }
