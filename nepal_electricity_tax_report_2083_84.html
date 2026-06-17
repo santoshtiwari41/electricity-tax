@@ -83,7 +83,10 @@ table.rpt tr:last-child td { border-bottom: none; }
       <h1 class="rpt-title">Electricity Tax Contribution Report</h1>
       <p class="rpt-sub">FY 2083/84 Assessment &amp; 5-Year Projection &nbsp;&bull;&nbsp; Calculation A (Individual)</p>
     </div>
-    <select class="report-picker" id="reportSelect" aria-label="Select bill screenshot report"></select>
+    <div style="display:flex; gap:10px; flex-wrap:wrap;">
+      <select class="report-picker" id="datasetSelect" aria-label="Select JSON dataset file"></select>
+      <select class="report-picker" id="reportSelect" aria-label="Select bill screenshot report"></select>
+    </div>
   </div>
 </div>
 
@@ -240,7 +243,12 @@ table.rpt tr:last-child td { border-bottom: none; }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-const DATA_URL = "./arbind.json";
+const DATASET_FILES = [
+  { file: "arbind.json", label: "Arbind" },
+  { file: "krinjwal.json", label: "Krinjwal" },
+  { file: "rabindra.json", label: "Rabindra" },
+  { file: "santosh.json", label: "Santosh" }
+];
 const TARGET_MONTHS = ["magh", "falgun", "chaitra", "baisakh"];
 let reportData = null;
 let billChart = null;
@@ -849,22 +857,44 @@ function populateReportPicker() {
   select.innerHTML = reportData.reports
     .map(report => `<option value="${report.id}">${report.consumerName} (${report.consumerId || "no ID"})</option>`)
     .join("");
-  select.addEventListener("change", event => renderReport(event.target.value));
+  select.onchange = event => renderReport(event.target.value);
+}
+
+function populateDatasetPicker() {
+  const select = document.getElementById("datasetSelect");
+  select.innerHTML = DATASET_FILES
+    .map(item => `<option value="${item.file}">${item.label || item.file}</option>`)
+    .join("");
+  select.onchange = event => loadDataset(event.target.value).catch(showLoadError);
+}
+
+function showLoadError(error) {
+  const errorBox = document.getElementById("errorBox");
+  errorBox.style.display = "block";
+  errorBox.textContent = `Unable to load bill data. Run this page through a local web server so the JSON files can be fetched. (${error.message})`;
+  console.error(error);
+}
+
+async function loadDataset(fileUrl) {
+  const response = await fetch(fileUrl);
+  if (!response.ok) throw new Error(`Could not load ${fileUrl}`);
+  const text = await response.text();
+  if (!text.trim()) throw new Error(`${fileUrl} is empty`);
+  reportData = JSON.parse(text);
+  if (!reportData.reports || !reportData.reports.length) throw new Error(`${fileUrl} has no reports`);
+  const errorBox = document.getElementById("errorBox");
+  errorBox.style.display = "none";
+  populateReportPicker();
+  renderReport(reportData.reports[0].id);
 }
 
 async function init() {
+  setupViewTabs();
+  populateDatasetPicker();
   try {
-    const response = await fetch(DATA_URL);
-    if (!response.ok) throw new Error(`Could not load ${DATA_URL}`);
-    reportData = await response.json();
-    setupViewTabs();
-    populateReportPicker();
-    renderReport(reportData.reports[0].id);
+    await loadDataset(DATASET_FILES[0].file);
   } catch (error) {
-    const errorBox = document.getElementById("errorBox");
-    errorBox.style.display = "block";
-    errorBox.textContent = `Unable to load bill data from ${DATA_URL}. Run this page through a local web server so the separate JSON file can be fetched.`;
-    console.error(error);
+    showLoadError(error);
   }
 }
 
