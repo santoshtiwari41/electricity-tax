@@ -14,6 +14,11 @@
       "2087/88"
     ]
   },
+  "census2078": {
+    "totalHouseholds": 6666937,
+    "label": "National Population and Housing Census 2078",
+    "sourceUrl": "https://censusnepal.cbs.gov.np/Home/Index/EN"
+  },
   "reports": [
     {
       "id": "Ambika Pokhrel",
