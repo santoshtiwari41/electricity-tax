@@ -1,0 +1,284 @@
+{
+  "taxRules": {
+    "vatRatePct": 5,
+    "vatExemptUnits": 50,
+    "developmentSurchargePct": 1.5
+  },
+  "projection": {
+    "monthsPerYear": 12,
+    "years": [
+      "2083/84",
+      "2084/85",
+      "2085/86",
+      "2086/87",
+      "2087/88"
+    ]
+  },
+  "reports": [
+    {
+      "id": "Gokarna Tiwari",
+      "screenshotFile": "",
+      "consumerName": "Mr. Gokarna Tiwari",
+      "scNumber": "012.27.018",
+      "consumerId": "25263",
+      "neaLocation": "Gorkha Municipality DC",
+      "district": "Gorkha",
+      "familyMembers": 5,
+      "connectionType": "Not provided in screenshot",
+      "bills": [
+        {
+          "monthKey": "magh",
+          "billMonth": "Magh/2082",
+          "billDate": "10-FEB-26",
+          "units": 15,
+          "billAmount": 30,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 30,
+          "paidAmount": 30
+        },
+        {
+          "monthKey": "falgun",
+          "billMonth": "Falgun/2082",
+          "billDate": "11-MAR-26",
+          "units": 17,
+          "billAmount": 30,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 30,
+          "paidAmount": 30
+        },
+        {
+          "monthKey": "chaitra",
+          "billMonth": "Chaitra/2082",
+          "billDate": "10-APR-26",
+          "units": 15,
+          "billAmount": 30,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 30,
+          "paidAmount": 30
+        },
+        {
+          "monthKey": "baisakh",
+          "billMonth": "Baisakh/2083",
+          "billDate": "10-MAY-26",
+          "units": 19,
+          "billAmount": 30,
+          "rebateLabel": "Rebate",
+          "payableAmount": 30,
+          "paidAmount": 30
+        }
+      ]
+    },
+    {
+      "id": "Jyoti Prasad Paudel",
+      "screenshotFile": "",
+      "consumerName": "Mr. Jyoti Prasad Paudel",
+      "scNumber": "",
+      "consumerId": "",
+      "neaLocation": "Kathmandu",
+      "district": "Kathmandu",
+      "familyMembers": 5,
+      "connectionType": "Not provided in screenshot",
+      "bills": [
+        {
+          "monthKey": "magh",
+          "billMonth": "Magh/2082",
+          "billDate": "25-JAN-26",
+          "units": 70,
+          "billAmount": 627,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 630,
+          "paidAmount": 630
+        },
+        {
+          "monthKey": "falgun",
+          "billMonth": "Falgun/2082",
+          "billDate": "23-FEB-26",
+          "units": 72,
+          "billAmount": 646,
+          "rebateLabel": "Penalty",
+          "payableAmount": 450,
+          "paidAmount": 650
+        },
+        {
+          "monthKey": "chaitra",
+          "billMonth": "Chaitra/2082",
+          "billDate": "25-MAR-26",
+          "units": 69,
+          "billAmount": 617,
+          "rebateLabel": "Rebate",
+          "payableAmount": 510,
+          "paidAmount": 510
+        },
+        {
+          "monthKey": "baisakh",
+          "billMonth": "Baisakh/2083",
+          "billDate": "24-APR-26",
+          "units": 60,
+          "billAmount": 455,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 455,
+          "paidAmount": 455
+        }
+      ]
+    },
+    {
+      "id": "salina_thapa",
+      "screenshotFile": "",
+      "consumerName": "Ms. Salina Thapa",
+      "scNumber": "003.22.010",
+      "consumerId": "3045",
+      "neaLocation": "Lalitpur DC",
+      "district": "Lalitpur",
+      "familyMembers": 4,
+      "connectionType": "15 Amp Single Phase",
+      "bills": [
+        {
+          "monthKey": "magh",
+          "billMonth": "Magh/2082",
+          "billDate": "25-JAN-26",
+          "units": 65,
+          "billAmount": 554,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 554,
+          "paidAmount": 554
+        },
+        {
+          "monthKey": "falgun",
+          "billMonth": "Falgun/2082",
+          "billDate": "23-FEB-26",
+          "units": 70,
+          "billAmount": 602,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 602,
+          "paidAmount": 602
+        },
+        {
+          "monthKey": "chaitra",
+          "billMonth": "Chaitra/2082",
+          "billDate": "25-MAR-26",
+          "units": 58,
+          "billAmount": 487,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 487,
+          "paidAmount": 487
+        },
+        {
+          "monthKey": "baisakh",
+          "billMonth": "Baisakh/2083",
+          "billDate": "24-APR-26",
+          "units": 75,
+          "billAmount": 651,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 651,
+          "paidAmount": 651
+        }
+      ]
+    },
+    {
+      "id": "sobita_adhikari",
+      "screenshotFile": "",
+      "consumerName": "Ms. Sobita Adhikari",
+      "scNumber": "003.22.011",
+      "consumerId": "3046",
+      "neaLocation": "Pokhara DC",
+      "district": "Pokhara",
+      "familyMembers": 4,
+      "connectionType": "15 Amp Single Phase",
+      "bills": [
+        {
+          "monthKey": "magh",
+          "billMonth": "Magh/2082",
+          "billDate": "25-JAN-26",
+          "units": 60,
+          "billAmount": 506,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 506,
+          "paidAmount": 506
+        },
+        {
+          "monthKey": "falgun",
+          "billMonth": "Falgun/2082",
+          "billDate": "23-FEB-26",
+          "units": 62,
+          "billAmount": 525,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 525,
+          "paidAmount": 525
+        },
+        {
+          "monthKey": "chaitra",
+          "billMonth": "Chaitra/2082",
+          "billDate": "25-MAR-26",
+          "units": 55,
+          "billAmount": 458,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 458,
+          "paidAmount": 458
+        },
+        {
+          "monthKey": "baisakh",
+          "billMonth": "Baisakh/2083",
+          "billDate": "24-APR-26",
+          "units": 68,
+          "billAmount": 583,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 583,
+          "paidAmount": 583
+        }
+      ]
+    },
+    {
+      "id": "kamala_dhakal",
+      "screenshotFile": "",
+      "consumerName": "Ms. Kamala Dhakal",
+      "scNumber": "003.22.012",
+      "consumerId": "3047",
+      "neaLocation": "Chitwan DC",
+      "district": "Chitwan",
+      "familyMembers": 4,
+      "connectionType": "15 Amp Single Phase",
+      "bills": [
+        {
+          "monthKey": "magh",
+          "billMonth": "Magh/2082",
+          "billDate": "25-JAN-26",
+          "units": 72,
+          "billAmount": 622,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 622,
+          "paidAmount": 622
+        },
+        {
+          "monthKey": "falgun",
+          "billMonth": "Falgun/2082",
+          "billDate": "23-FEB-26",
+          "units": 78,
+          "billAmount": 680,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 680,
+          "paidAmount": 680
+        },
+        {
+          "monthKey": "chaitra",
+          "billMonth": "Chaitra/2082",
+          "billDate": "25-MAR-26",
+          "units": 69,
+          "billAmount": 593,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 593,
+          "paidAmount": 593
+        },
+        {
+          "monthKey": "baisakh",
+          "billMonth": "Baisakh/2083",
+          "billDate": "24-APR-26",
+          "units": 80,
+          "billAmount": 699,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 699,
+          "paidAmount": 699
+        }
+      ]
+    }
+  ]
+}

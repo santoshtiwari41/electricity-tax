@@ -1,0 +1,225 @@
+{
+  "taxRules": {
+    "vatRatePct": 5,
+    "vatExemptUnits": 50,
+    "developmentSurchargePct": 1.5
+  },
+  "projection": {
+    "monthsPerYear": 12,
+    "years": ["2083/84", "2084/85", "2085/86", "2086/87", "2087/88"]
+  },
+  "reports": [
+    {
+      "id": "huma_kumari_karki_25263",
+      "screenshotFile": "img/Screenshot From 2026-06-15 15-44-13.png",
+      "consumerName": "Mrs. Huma Kumari Karki",
+      "scNumber": "012.27.018",
+      "consumerId": "25263",
+      "neaLocation": "SURUNGA SUB DC",
+      "district": "JHAPA",
+      "familyMembers": 4,
+      "connectionType": "Not provided in screenshot",
+      "bills": [
+        {
+          "monthKey": "magh",
+          "billMonth": "Magh/2082",
+          "billDate": "10-FEB-26",
+          "units": 78,
+          "billAmount": 626,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 626,
+          "paidAmount": 626
+        },
+        {
+          "monthKey": "falgun",
+          "billMonth": "Falgun/2082",
+          "billDate": "11-MAR-26",
+          "units": 75,
+          "billAmount": 598,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 598,
+          "paidAmount": 598
+        },
+        {
+          "monthKey": "chaitra",
+          "billMonth": "Chaitra/2082",
+          "billDate": "10-APR-26",
+          "units": 112,
+          "billAmount": 974,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 974,
+          "paidAmount": 974
+        },
+        {
+          "monthKey": "baisakh",
+          "billMonth": "Baisakh/2083",
+          "billDate": "10-MAY-26",
+          "units": 131,
+          "billAmount": 1155,
+          "rebateLabel": "Rebate",
+          "payableAmount": 1132,
+          "paidAmount": 1132
+        }
+      ]
+    },
+    {
+      "id": "phul_kumari_sah_24849",
+      "screenshotFile": "img/Screenshot From 2026-06-15 15-45-08.png",
+      "consumerName": "Mrs. Phul Kumari Sah",
+      "scNumber": "002.11.034",
+      "consumerId": "24849",
+      "neaLocation": "MIRCHAIYA DC",
+      "district": "SIRAHA",
+      "familyMembers": 5,
+      "connectionType": "Not provided in screenshot",
+      "bills": [
+        {
+          "monthKey": "magh",
+          "billMonth": "Magh/2082",
+          "billDate": "25-JAN-26",
+          "units": 30,
+          "billAmount": 173,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 173,
+          "paidAmount": 173
+        },
+        {
+          "monthKey": "falgun",
+          "billMonth": "Falgun/2082",
+          "billDate": "23-FEB-26",
+          "units": 47,
+          "billAmount": 5,
+          "rebateLabel": "Penalty",
+          "payableAmount": 6,
+          "paidAmount": 7
+        },
+        {
+          "monthKey": "chaitra",
+          "billMonth": "Chaitra/2082",
+          "billDate": "25-MAR-26",
+          "units": 67,
+          "billAmount": 520,
+          "rebateLabel": "Rebate",
+          "payableAmount": 510,
+          "paidAmount": 510
+        },
+        {
+          "monthKey": "baisakh",
+          "billMonth": "Baisakh/2083",
+          "billDate": "24-APR-26",
+          "units": 60,
+          "billAmount": 455,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 455,
+          "paidAmount": 455
+        }
+      ]
+    },
+    {
+      "id": "kamli_devi_sahu_2037",
+      "screenshotFile": "img/Screenshot From 2026-06-15 15-54-41.png",
+      "consumerName": "Kamli Devi Sahu (My Household)",
+      "scNumber": "002.11.045",
+      "consumerId": "2037",
+      "neaLocation": "MIRCHAIYA DC",
+      "district": "SIRAHA",
+      "familyMembers": 9,
+      "connectionType": "Not provided in screenshot",
+      "bills": [
+        {
+          "monthKey": "magh",
+          "billMonth": "Magh/2082",
+          "billDate": "25-JAN-26",
+          "units": 261,
+          "billAmount": 2456,
+          "rebateLabel": "Rebate",
+          "payableAmount": 2407,
+          "paidAmount": 2407
+        },
+        {
+          "monthKey": "falgun",
+          "billMonth": "Falgun/2082",
+          "billDate": "23-FEB-26",
+          "units": 288,
+          "billAmount": 2753,
+          "rebateLabel": "Rebate",
+          "payableAmount": 2698,
+          "paidAmount": 2698
+        },
+        {
+          "monthKey": "chaitra",
+          "billMonth": "Chaitra/2082",
+          "billDate": "25-MAR-26",
+          "units": 162,
+          "billAmount": 1494,
+          "rebateLabel": "Rebate",
+          "payableAmount": 1465,
+          "paidAmount": 1465
+        },
+        {
+          "monthKey": "baisakh",
+          "billMonth": "Baisakh/2083",
+          "billDate": "24-APR-26",
+          "units": 363,
+          "billAmount": 3621,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 3621,
+          "paidAmount": 3621
+        }
+      ]
+    },
+    {
+      "id": "jagarnath_shah_2554",
+      "screenshotFile": "img/Screenshot From 2026-06-15 15-55-57.png",
+      "consumerName": "Jagarnath Shah",
+      "scNumber": "001.29.105",
+      "consumerId": "2554",
+      "neaLocation": "RANI SUB DC",
+      "district": "MORANG",
+      "familyMembers": 5,
+      "connectionType": "Not provided in screenshot",
+      "bills": [
+        {
+          "monthKey": "magh",
+          "billMonth": "Magh/2082",
+          "billDate": "12-FEB-26",
+          "units": null,
+          "billAmount": 220,
+          "rebateLabel": "No rebate or penalty",
+          "payableAmount": 220,
+          "paidAmount": 220
+        },
+        {
+          "monthKey": "falgun",
+          "billMonth": "Falgun/2082",
+          "billDate": "13-MAR-26",
+          "units": null,
+          "billAmount": 236,
+          "rebateLabel": "Rebate",
+          "payableAmount": 232,
+          "paidAmount": 232
+        },
+        {
+          "monthKey": "chaitra",
+          "billMonth": "Chaitra/2082",
+          "billDate": "12-APR-26",
+          "units": null,
+          "billAmount": 267,
+          "rebateLabel": "Rebate",
+          "payableAmount": 262,
+          "paidAmount": 262
+        },
+        {
+          "monthKey": "baisakh",
+          "billMonth": "Baisakh/2083",
+          "billDate": "12-MAY-26",
+          "units": null,
+          "billAmount": 991,
+          "rebateLabel": "Rebate",
+          "payableAmount": 972,
+          "paidAmount": 972
+        }
+      ]
+    }
+  ]
+}

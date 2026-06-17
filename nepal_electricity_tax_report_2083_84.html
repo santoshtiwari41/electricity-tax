@@ -1,0 +1,651 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Electricity Tax Contribution Report</title>
+
+<style>
+body { margin: 0; background: #F7F8FA; color: #1F2933; font-family: Arial, Helvetica, sans-serif; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.rpt-wrap { max-width: 1180px; margin: 0 auto; font-family: var(--font-sans, Arial, Helvetica, sans-serif); padding: 1rem; }
+.rpt-header { background: var(--color-background-secondary, #FFFFFF); border: 0.5px solid var(--color-border-tertiary, #D8DEE6); border-radius: var(--border-radius-lg, 8px); padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+.rpt-head-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+.rpt-tag { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--color-text-secondary, #5E6B78); margin-bottom: 4px; }
+.rpt-title { font-size: 20px; font-weight: 500; color: var(--color-text-primary, #1F2933); margin: 0 0 4px; }
+.rpt-sub { font-size: 13px; color: var(--color-text-secondary, #5E6B78); margin: 0; }
+.report-picker { min-width: 260px; border: 0.5px solid var(--color-border-secondary, #B8C2CC); border-radius: var(--border-radius-md, 6px); background: var(--color-background-primary, #FFFFFF); color: var(--color-text-primary, #1F2933); padding: 8px 10px; font: inherit; font-size: 13px; }
+.info-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1rem; }
+.info-card { background: var(--color-background-secondary, #FFFFFF); border: 0.5px solid var(--color-border-tertiary, #D8DEE6); border-radius: var(--border-radius-md, 6px); padding: 10px 14px; }
+.info-label { font-size: 11px; color: var(--color-text-secondary, #5E6B78); margin-bottom: 2px; letter-spacing: 0.5px; text-transform: uppercase; }
+.info-val { font-size: 14px; font-weight: 500; color: var(--color-text-primary, #1F2933); }
+.section { background: var(--color-background-primary, #FFFFFF); border: 0.5px solid var(--color-border-tertiary, #D8DEE6); border-radius: var(--border-radius-lg, 8px); padding: 1.25rem 1.5rem; margin-bottom: 1rem; overflow-x: auto; }
+.sec-head { font-size: 13px; font-weight: 500; color: var(--color-text-secondary, #5E6B78); margin: 0 0 14px; letter-spacing: 1px; text-transform: uppercase; }
+table.rpt { width: 100%; border-collapse: collapse; font-size: 13px; }
+table.rpt th { padding: 8px 10px; text-align: left; font-size: 11px; font-weight: 500; color: var(--color-text-secondary, #5E6B78); border-bottom: 0.5px solid var(--color-border-tertiary, #D8DEE6); letter-spacing: 0.5px; text-transform: uppercase; }
+table.rpt td { padding: 8px 10px; color: var(--color-text-primary, #1F2933); border-bottom: 0.5px solid var(--color-border-tertiary, #D8DEE6); }
+table.rpt tr:last-child td { border-bottom: none; }
+.tfoot td { background: var(--color-background-secondary, #F1F5F9); font-weight: 500; }
+.pill { display: inline-block; padding: 2px 8px; border-radius: 20px; font-size: 12px; font-weight: 500; white-space: nowrap; }
+.pill-blue { background: #E6F1FB; color: #0C447C; }
+.pill-amber { background: #FAEEDA; color: #633806; }
+.pill-green { background: #EAF3DE; color: #27500A; }
+.pill-red { background: #FCEBEB; color: #791F1F; }
+.pill-gray { background: #F1EFE8; color: #444441; }
+.stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 1rem; }
+.stat-card { background: var(--color-background-secondary, #F1F5F9); border-radius: var(--border-radius-md, 6px); padding: 12px 14px; }
+.stat-label { font-size: 11px; color: var(--color-text-secondary, #5E6B78); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.stat-val { font-size: 20px; font-weight: 500; color: var(--color-text-primary, #1F2933); }
+.proj-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.proj-box { border: 0.5px solid var(--color-border-tertiary, #D8DEE6); border-radius: var(--border-radius-lg, 8px); padding: 1.25rem; }
+.proj-yr { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--color-text-secondary, #5E6B78); margin-bottom: 12px; }
+.proj-row2 { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 6px 0; border-bottom: 0.5px solid var(--color-border-tertiary, #D8DEE6); }
+.proj-row2:last-of-type { border-bottom: none; }
+.proj-lbl { font-size: 13px; color: var(--color-text-secondary, #5E6B78); }
+.proj-amt { font-size: 14px; font-weight: 500; color: var(--color-text-primary, #1F2933); white-space: nowrap; }
+.proj-total { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: 10px; padding-top: 10px; border-top: 0.5px solid var(--color-border-secondary, #B8C2CC); }
+.proj-total-lbl { font-size: 13px; font-weight: 500; }
+.proj-total-amt { font-size: 22px; font-weight: 500; white-space: nowrap; }
+.note-box { background: var(--color-background-secondary, #FFFFFF); border: 0.5px solid var(--color-border-tertiary, #D8DEE6); border-radius: var(--border-radius-md, 6px); padding: 12px 16px; margin-top: 1rem; font-size: 12px; color: var(--color-text-secondary, #5E6B78); line-height: 1.7; }
+.yr-table td, .yr-table th { padding: 7px 10px; }
+.error-box { display: none; border-color: #D96262; color: #791F1F; background: #FCEBEB; }
+@media (max-width: 760px) {
+  .rpt-head-row, .proj-row { display: block; }
+  .report-picker { width: 100%; margin-top: 1rem; min-width: 0; }
+  .info-grid, .stat-row { grid-template-columns: 1fr; }
+  .proj-box + .proj-box { margin-top: 12px; }
+}
+</style>
+</head>
+<body>
+
+<h2 class="sr-only" id="srTitle">Electricity Tax Contribution Report</h2>
+
+<div class="rpt-wrap">
+
+<div class="rpt-header">
+  <div class="rpt-head-row">
+    <div>
+      <p class="rpt-tag">Government of Nepal &mdash; Nepal Electricity Authority</p>
+      <h1 class="rpt-title">Electricity Tax Contribution Report</h1>
+      <p class="rpt-sub">FY 2083/84 Assessment &amp; 5-Year Projection &nbsp;&bull;&nbsp; Calculation A / B / C</p>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <select class="report-picker" id="datasetSelect" aria-label="Select JSON dataset file"></select>
+      <select class="report-picker" id="reportSelect" aria-label="Select bill screenshot report"></select>
+    </div>
+  </div>
+</div>
+
+<div class="note-box error-box" id="errorBox"></div>
+
+<div class="info-grid">
+  <div class="info-card"><div class="info-label">Consumer name</div><div class="info-val" id="consumerName">-</div></div>
+  <div class="info-card"><div class="info-label">SC number</div><div class="info-val" id="scNumber">-</div></div>
+  <div class="info-card"><div class="info-label">Consumer ID</div><div class="info-val" id="consumerId">-</div></div>
+  <div class="info-card"><div class="info-label">NEA location</div><div class="info-val" id="neaLocation">-</div></div>
+  <div class="info-card"><div class="info-label">District</div><div class="info-val" id="district">-</div></div>
+  <div class="info-card"><div class="info-label">Family members</div><div class="info-val" id="familyMembers">-</div></div>
+</div>
+
+<div class="section">
+  <p class="sec-head"><i class="ti ti-file-invoice" aria-hidden="true"></i> &nbsp;4-month bill summary (Magh, Falgun, Chaitra, Baisakh)</p>
+  <table class="rpt">
+    <thead>
+      <tr>
+        <th>#</th><th>Bill month</th><th>Units (kWh)</th><th>Bill amount</th><th>Rebate / penalty</th><th>Amount paid</th><th>Taxable units (&gt;50)</th>
+      </tr>
+    </thead>
+    <tbody id="billSummaryBody"></tbody>
+  </table>
+
+  <div class="stat-row">
+    <div class="stat-card">
+      <div class="stat-label">Avg monthly units</div>
+      <div class="stat-val" id="avgUnits">-</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Avg monthly bill</div>
+      <div class="stat-val" id="avgBill">-</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Units per person/month</div>
+      <div class="stat-val" id="unitsPerPerson">-</div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <p class="sec-head"><i class="ti ti-chart-bar" aria-hidden="true"></i> &nbsp;Monthly consumption pattern</p>
+  <div style="position:relative; width:100%; height:200px;">
+    <canvas id="billChart" role="img" aria-label="Bar chart of monthly electricity units consumed"></canvas>
+  </div>
+</div>
+
+<div class="section">
+  <p class="sec-head"><i class="ti ti-receipt-tax" aria-hidden="true"></i> &nbsp;Tax calculation &mdash; FY 2083/84 projection</p>
+  <p id="taxRuleNote" style="font-size:12px; color:var(--color-text-secondary); margin: -8px 0 14px;"></p>
+  <table class="rpt">
+    <thead>
+      <tr>
+        <th>Month</th><th>Total units</th><th>Energy charge (Rs)</th><th>Taxable units</th><th>Taxable energy (Rs)</th><th>5% VAT (Rs)</th><th>1.5% duty (Rs)</th><th>Total tax (Rs)</th>
+      </tr>
+    </thead>
+    <tbody id="taxBody"></tbody>
+  </table>
+</div>
+
+<div class="section">
+  <p class="sec-head"><i class="ti ti-building-bank" aria-hidden="true"></i> &nbsp;Tax contributed to Government of Nepal (GoN)</p>
+  <div class="proj-row">
+    <div class="proj-box">
+      <div class="proj-yr">FY 2083/84 &mdash; annual estimate</div>
+      <div class="proj-row2"><span class="proj-lbl">5% VAT on units above 50</span><span class="proj-amt" id="ann-vat">-</span></div>
+      <div class="proj-row2"><span class="proj-lbl">1.5% electricity dev. surcharge</span><span class="proj-amt" id="ann-duty">-</span></div>
+      <div class="proj-total">
+        <span class="proj-total-lbl" style="color:var(--color-text-info)">Total annual tax to GoN</span>
+        <span class="proj-total-amt" style="color:var(--color-text-info)" id="ann-total">-</span>
+      </div>
+    </div>
+    <div class="proj-box">
+      <div class="proj-yr">Next 5 years &mdash; 2083/84 to 2087/88</div>
+      <div class="proj-row2"><span class="proj-lbl">5% VAT (cumulative)</span><span class="proj-amt" id="five-vat">-</span></div>
+      <div class="proj-row2"><span class="proj-lbl">1.5% surcharge (cumulative)</span><span class="proj-amt" id="five-duty">-</span></div>
+      <div class="proj-total">
+        <span class="proj-total-lbl" style="color:var(--color-text-warning)">Total 5-year tax to GoN</span>
+        <span class="proj-total-amt" style="color:var(--color-text-warning)" id="five-total">-</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:1rem;">
+    <p class="sec-head" style="margin-bottom:10px; font-size:11px;">Year-by-year breakdown</p>
+    <table class="rpt yr-table">
+      <thead>
+        <tr>
+          <th>Fiscal year</th><th>5% VAT (Rs)</th><th>1.5% duty (Rs)</th><th>Annual tax (Rs)</th><th>Cumulative total (Rs)</th>
+        </tr>
+      </thead>
+      <tbody id="yrBody"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="note-box" id="notesBox"></div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const TARGET_MONTHS = ["magh", "falgun", "chaitra", "baisakh"];
+const AVERAGE_ID = "__average__";
+let reportData = null;
+let billChart = null;
+
+function money(value, decimals = 0) {
+  return "Rs " + Number(value || 0).toLocaleString(undefined, {
+    maximumFractionDigits: decimals,
+    minimumFractionDigits: decimals
+  });
+}
+
+function number(value, decimals = 0) {
+  return Number(value || 0).toLocaleString(undefined, {
+    maximumFractionDigits: decimals,
+    minimumFractionDigits: decimals
+  });
+}
+
+function totalEnergy(units) {
+  let energy = 0;
+  energy += Math.min(units, 20) * 4;
+  energy += Math.min(Math.max(0, units - 20), 10) * 6.5;
+  energy += Math.min(Math.max(0, units - 30), 20) * 8;
+  energy += Math.min(Math.max(0, units - 50), 100) * 9.5;
+  energy += Math.min(Math.max(0, units - 150), 100) * 9.5;
+  energy += Math.max(0, units - 250) * 11;
+  return energy;
+}
+
+function taxableEnergy(units) {
+  let energy = 0;
+  energy += Math.min(Math.max(0, units - 50), 100) * 9.5;
+  energy += Math.min(Math.max(0, units - 150), 100) * 9.5;
+  energy += Math.max(0, units - 250) * 11;
+  return energy;
+}
+
+function orderedFourMonthBills(report) {
+  return TARGET_MONTHS
+    .map(monthKey => report.bills.find(bill => bill.monthKey === monthKey))
+    .filter(Boolean);
+}
+
+function buildAverageReport(reports) {
+  const bills = TARGET_MONTHS.map(monthKey => {
+    let unitsSum = 0, unitsCount = 0, billSum = 0, billCount = 0, paidSum = 0, paidCount = 0;
+    let billMonthLabel = null;
+    reports.forEach(report => {
+      const bill = report.bills.find(item => item.monthKey === monthKey);
+      if (!bill) return;
+      if (!billMonthLabel) billMonthLabel = bill.billMonth;
+      if (hasUnits(bill)) { unitsSum += Number(bill.units); unitsCount += 1; }
+      if (bill.billAmount !== undefined && bill.billAmount !== null) { billSum += Number(bill.billAmount); billCount += 1; }
+      const paid = bill.paidAmount ?? bill.payableAmount ?? bill.billAmount;
+      if (paid !== undefined && paid !== null) { paidSum += Number(paid); paidCount += 1; }
+    });
+    return {
+      monthKey,
+      billMonth: billMonthLabel || monthKey,
+      billDate: "",
+      units: unitsCount ? Math.round((unitsSum / unitsCount) * 10) / 10 : null,
+      billAmount: billCount ? Math.round(billSum / billCount) : 0,
+      rebateLabel: "Average across consumers",
+      payableAmount: paidCount ? Math.round(paidSum / paidCount) : 0,
+      paidAmount: paidCount ? Math.round(paidSum / paidCount) : 0
+    };
+  });
+
+  const familyMembers = reports.length
+    ? Math.round((reports.reduce((sum, report) => sum + Number(report.familyMembers || 0), 0) / reports.length) * 10) / 10
+    : 0;
+
+  return {
+    id: AVERAGE_ID,
+    screenshotFile: "",
+    consumerName: `Average of all (${reports.length} consumers)`,
+    scNumber: "",
+    consumerId: "",
+    neaLocation: "Multiple locations",
+    district: "Multiple districts",
+    familyMembers,
+    connectionType: "Mixed",
+    bills
+  };
+}
+
+function rebateClass(label) {
+  const text = String(label || "").toLowerCase();
+  if (text.includes("penalty")) return "pill-red";
+  if (text.includes("rebate") && !text.includes("no rebate")) return "pill-green";
+  return "pill-gray";
+}
+
+function setText(id, value) {
+  document.getElementById(id).textContent = value;
+}
+
+function hasUnits(bill) {
+  return bill.units !== null && bill.units !== undefined && bill.units !== "";
+}
+
+function renderReport(reportId) {
+  const report = reportId === AVERAGE_ID
+    ? buildAverageReport(reportData.reports)
+    : (reportData.reports.find(item => item.id === reportId) || reportData.reports[0]);
+  const bills = orderedFourMonthBills(report);
+  const monthsUsed = bills.length || 1;
+  const familyMembers = Number(report.familyMembers || 0);
+  const taxRules = reportData.taxRules;
+  const projection = reportData.projection;
+
+  setText("srTitle", `Electricity Tax Contribution Report for ${report.consumerName || "consumer"}`);
+  setText("consumerName", report.consumerName || "Not provided");
+  setText("scNumber", report.scNumber || "Not provided");
+  setText("consumerId", report.consumerId || "Not provided");
+  setText("neaLocation", report.neaLocation || "Not provided");
+  setText("district", report.district || "Not provided");
+  setText("familyMembers", familyMembers ? `${familyMembers} persons` : "Not provided");
+  setText(
+    "taxRuleNote",
+    `New ${taxRules.vatRatePct}% concessional VAT on electricity consumed above ${taxRules.vatExemptUnits} units/month + existing ${taxRules.developmentSurchargePct}% electricity development surcharge.`
+  );
+
+  const summaryBody = document.getElementById("billSummaryBody");
+  summaryBody.innerHTML = "";
+
+  let totalUnits = 0;
+  let totalBill = 0;
+  let totalPaid = 0;
+  let totalTaxableUnits = 0;
+  let totalSaved = 0;
+  let totalPenalty = 0;
+  let unitMonths = 0;
+
+  bills.forEach((bill, index) => {
+    const unitsAvailable = hasUnits(bill);
+    const units = unitsAvailable ? Number(bill.units) : null;
+    const taxableUnits = unitsAvailable ? Math.max(0, units - taxRules.vatExemptUnits) : null;
+    const adjustment = Number(bill.billAmount || 0) - Number(bill.payableAmount ?? bill.paidAmount ?? bill.billAmount ?? 0);
+    totalBill += Number(bill.billAmount || 0);
+    totalPaid += Number(bill.paidAmount ?? bill.payableAmount ?? bill.billAmount ?? 0);
+    if (unitsAvailable) {
+      totalUnits += units;
+      totalTaxableUnits += taxableUnits;
+      unitMonths += 1;
+    }
+    if (adjustment > 0) totalSaved += adjustment;
+    if (adjustment < 0) totalPenalty += Math.abs(adjustment);
+
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td><strong>${bill.billMonth}</strong></td>
+      <td>${unitsAvailable ? `<span class="pill pill-blue">${number(units)}</span>` : `<span class="pill pill-gray">Not shown</span>`}</td>
+      <td>${money(bill.billAmount)}</td>
+      <td><span class="pill ${rebateClass(bill.rebateLabel)}">${bill.rebateLabel || "No rebate or penalty"}</span></td>
+      <td>${money(bill.paidAmount ?? bill.payableAmount ?? bill.billAmount)}</td>
+      <td>${unitsAvailable ? `<span class="pill pill-amber">${number(taxableUnits)} units</span>` : `<span class="pill pill-gray">Not available</span>`}</td>
+    `;
+    summaryBody.appendChild(row);
+  });
+
+  const unitsSummary = unitMonths
+    ? `${number(totalUnits)} / ${number(totalUnits / unitMonths, 1)} avg`
+    : "Not shown";
+  const taxableSummary = unitMonths
+    ? `${number(totalTaxableUnits)} / ${number(totalTaxableUnits / unitMonths, 1)} avg`
+    : "Not available";
+
+  const totalRow = document.createElement("tr");
+  totalRow.className = "tfoot";
+  totalRow.innerHTML = `
+    <td colspan="2"><strong>Total / Average</strong></td>
+    <td><strong>${unitsSummary}</strong></td>
+    <td><strong>${money(totalBill)}</strong></td>
+    <td><strong>${money(totalSaved)} saved${totalPenalty ? `, ${money(totalPenalty)} penalty` : ""}</strong></td>
+    <td><strong>${money(totalPaid)}</strong></td>
+    <td><strong>${taxableSummary}</strong></td>
+  `;
+  summaryBody.appendChild(totalRow);
+
+  setText("avgUnits", unitMonths ? `${number(totalUnits / unitMonths, 1)} kWh` : "Not shown");
+  setText("avgBill", money(totalPaid / monthsUsed));
+  setText("unitsPerPerson", familyMembers && unitMonths ? `${number((totalUnits / unitMonths) / familyMembers, 1)} kWh` : "Not provided");
+
+  renderTaxTables(bills, taxRules, projection);
+  renderChart(bills);
+  renderNotes(report, taxRules);
+}
+
+function renderTaxTables(bills, taxRules, projection) {
+  let totalVAT = 0;
+  let totalDuty = 0;
+  const tbody = document.getElementById("taxBody");
+  tbody.innerHTML = "";
+  const calculableBills = bills.filter(hasUnits);
+
+  if (!calculableBills.length) {
+    const missingRow = document.createElement("tr");
+    missingRow.innerHTML = `
+      <td colspan="8"><span class="pill pill-gray">Consumed units are not shown in this screenshot, so unit-based VAT and surcharge cannot be calculated.</span></td>
+    `;
+    tbody.appendChild(missingRow);
+
+    ["ann-vat", "ann-duty", "ann-total", "five-vat", "five-duty", "five-total"].forEach(id => {
+      setText(id, "Not enough data");
+    });
+
+    const yrBody = document.getElementById("yrBody");
+    yrBody.innerHTML = `
+      <tr>
+        <td colspan="5"><span class="pill pill-gray">Add consumed units for Magh, Falgun, Chaitra and Baisakh to calculate year-by-year tax.</span></td>
+      </tr>
+    `;
+    return;
+  }
+
+  bills.forEach(bill => {
+    if (!hasUnits(bill)) {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td><strong>${bill.billMonth}</strong></td>
+        <td colspan="7"><span class="pill pill-gray">Consumed units not shown; tax skipped for this month.</span></td>
+      `;
+      tbody.appendChild(row);
+      return;
+    }
+
+    const units = Number(bill.units);
+    const energy = totalEnergy(units);
+    const taxable = taxableEnergy(units);
+    const vat = taxable * (taxRules.vatRatePct / 100);
+    const duty = energy * (taxRules.developmentSurchargePct / 100);
+    const taxUnits = Math.max(0, units - taxRules.vatExemptUnits);
+    totalVAT += vat;
+    totalDuty += duty;
+
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td><strong>${bill.billMonth}</strong></td>
+      <td>${number(units)}</td>
+      <td>${money(Math.round(energy))}</td>
+      <td><span class="pill pill-amber">${number(taxUnits)}</span></td>
+      <td>${money(Math.round(taxable))}</td>
+      <td style="color:var(--color-text-danger); font-weight:500">${money(vat, 2)}</td>
+      <td style="color:var(--color-text-info)">${money(duty, 2)}</td>
+      <td style="font-weight:500">${money(vat + duty, 2)}</td>
+    `;
+    tbody.appendChild(row);
+  });
+
+  const monthsUsed = calculableBills.length;
+  const avgVAT = totalVAT / monthsUsed;
+  const avgDuty = totalDuty / monthsUsed;
+  const annVAT = avgVAT * projection.monthsPerYear;
+  const annDuty = avgDuty * projection.monthsPerYear;
+  const annTotal = annVAT + annDuty;
+
+  const averageRow = document.createElement("tr");
+  averageRow.className = "tfoot";
+  averageRow.innerHTML = `
+    <td colspan="5"><strong>Monthly average</strong></td>
+    <td style="font-weight:500; color:var(--color-text-danger)">${money(avgVAT, 2)}</td>
+    <td style="font-weight:500; color:var(--color-text-info)">${money(avgDuty, 2)}</td>
+    <td style="font-weight:500">${money(avgVAT + avgDuty, 2)}</td>
+  `;
+  tbody.appendChild(averageRow);
+
+  setText("ann-vat", money(Math.round(annVAT)));
+  setText("ann-duty", money(Math.round(annDuty)));
+  setText("ann-total", money(Math.round(annTotal)));
+  setText("five-vat", money(Math.round(annVAT * projection.years.length)));
+  setText("five-duty", money(Math.round(annDuty * projection.years.length)));
+  setText("five-total", money(Math.round(annTotal * projection.years.length)));
+
+  const yrBody = document.getElementById("yrBody");
+  yrBody.innerHTML = "";
+  projection.years.forEach((year, index) => {
+    const cumulative = annTotal * (index + 1);
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td><strong>${year} BS</strong></td>
+      <td style="color:var(--color-text-danger)">${money(Math.round(annVAT))}</td>
+      <td style="color:var(--color-text-info)">${money(Math.round(annDuty))}</td>
+      <td>${money(Math.round(annTotal))}</td>
+      <td style="font-weight:500">${money(Math.round(cumulative))}</td>
+    `;
+    yrBody.appendChild(row);
+  });
+
+  const totalYears = projection.years.length;
+  const totalYearRow = document.createElement("tr");
+  totalYearRow.className = "tfoot";
+  totalYearRow.innerHTML = `
+    <td><strong>${totalYears}-year total</strong></td>
+    <td style="color:var(--color-text-danger); font-weight:500">${money(Math.round(annVAT * totalYears))}</td>
+    <td style="color:var(--color-text-info); font-weight:500">${money(Math.round(annDuty * totalYears))}</td>
+    <td style="font-weight:500">${money(Math.round(annTotal * totalYears))}</td>
+    <td style="font-weight:500; color:var(--color-text-warning)">${money(Math.round(annTotal * totalYears))}</td>
+  `;
+  yrBody.appendChild(totalYearRow);
+}
+
+function renderChart(bills) {
+  const canvas = document.getElementById("billChart");
+  canvas.setAttribute(
+    "aria-label",
+    "Bar chart of monthly electricity units consumed: " + bills.map(bill => `${bill.billMonth} ${hasUnits(bill) ? bill.units : "not shown"}`).join(", ")
+  );
+
+  if (typeof Chart === "undefined") {
+    const chartWrap = canvas.parentElement;
+    canvas.style.display = "none";
+    let chartFallback = document.getElementById("chartFallback");
+    if (!chartFallback) {
+      chartFallback = document.createElement("div");
+      chartFallback.id = "chartFallback";
+      chartFallback.className = "note-box";
+      chartFallback.style.marginTop = "0";
+      chartWrap.appendChild(chartFallback);
+    }
+    chartFallback.innerHTML = `
+        Chart library could not load. The bill and tax tables below are still calculated from the JSON data.
+    `;
+    return;
+  }
+
+  canvas.style.display = "block";
+  const chartFallback = document.getElementById("chartFallback");
+  if (chartFallback) chartFallback.remove();
+
+  if (billChart) billChart.destroy();
+  billChart = new Chart(canvas, {
+    type: "bar",
+    data: {
+      labels: bills.map(bill => bill.billMonth),
+      datasets: [
+        {
+          label: "Units consumed (kWh)",
+          data: bills.map(bill => hasUnits(bill) ? bill.units : null),
+          backgroundColor: "#185FA5",
+          borderRadius: 4,
+          yAxisID: "y",
+        },
+        {
+          label: "Bill amount (Rs)",
+          data: bills.map(bill => bill.billAmount),
+          backgroundColor: "#BA7517",
+          borderRadius: 4,
+          yAxisID: "y2",
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: { mode: "index", intersect: false }
+      },
+      scales: {
+        y:  { position: "left",  title: { display: true, text: "Units (kWh)", font: { size: 11 } }, ticks: { font: { size: 11 } } },
+        y2: { position: "right", title: { display: true, text: "Bill (Rs)",   font: { size: 11 } }, grid: { drawOnChartArea: false }, ticks: { font: { size: 11 } } },
+        x:  { ticks: { font: { size: 11 } } }
+      }
+    }
+  });
+}
+
+function renderNotes(report, taxRules) {
+  const bills = orderedFourMonthBills(report);
+  const missingUnitMonths = bills.filter(bill => !hasUnits(bill)).map(bill => bill.billMonth);
+  const missingUnitsNote = missingUnitMonths.length
+    ? `<br>&bull; Consumed units are not visible for: ${missingUnitMonths.join(", ")}. Unit-based tax cannot be calculated for those months until units are added.`
+    : "";
+  document.getElementById("notesBox").innerHTML = `
+    <strong>Notes &amp; assumptions:</strong><br>
+    &bull; Based on 4-month NEA billing data: Magh, Falgun, Chaitra and Baisakh only.<br>
+    &bull; Source record: ${report.consumerName || "consumer"}, Consumer ID ${report.consumerId || "not provided"}, ${report.neaLocation || "NEA location not provided"}.<br>
+    &bull; Screenshot file: ${report.screenshotFile || "Not provided"}.<br>
+    &bull; Connection type: ${report.connectionType || "Not provided"}.<br>
+    &bull; New ${taxRules.vatRatePct}% VAT applies above the first ${taxRules.vatExemptUnits} units/month; ${taxRules.developmentSurchargePct}% electricity development surcharge is projected on calculated energy charge.<br>
+    &bull; Projections assume the same 4-month average consumption pattern for future months.${missingUnitsNote}
+  `;
+}
+
+function populateReportPicker() {
+  const select = document.getElementById("reportSelect");
+  const individualOptions = reportData.reports
+    .map(report => `<option value="${report.id}">${report.consumerName} (${report.consumerId || "no ID"})</option>`)
+    .join("");
+  const averageOption = reportData.reports.length > 1
+    ? `<option value="${AVERAGE_ID}">★ Average of all (${reportData.reports.length} consumers)</option>`
+    : "";
+  select.innerHTML = individualOptions + averageOption;
+  select.onchange = event => renderReport(event.target.value);
+}
+
+async function loadDataset(fileUrl) {
+  const response = await fetch(fileUrl);
+  if (!response.ok) throw new Error(`Could not load ${fileUrl}`);
+  reportData = await response.json();
+  populateReportPicker();
+  renderReport(reportData.reports[0].id);
+}
+
+function populateDatasetPicker(manifest) {
+  const select = document.getElementById("datasetSelect");
+  select.innerHTML = manifest
+    .map(item => `<option value="${item.file}">${item.label || item.file}</option>`)
+    .join("");
+  select.onchange = event => loadDataset(event.target.value).catch(showLoadError);
+}
+
+function showLoadError(error) {
+  const errorBox = document.getElementById("errorBox");
+  errorBox.style.display = "block";
+  errorBox.textContent = `Unable to load bill data. Run this page through a local web server so JSON files can be fetched. (${error.message})`;
+  console.error(error);
+}
+
+function labelFromFilename(file) {
+  const base = file.replace(/^.*\//, "").replace(/\.json$/i, "");
+  return base
+    .replace(/[_-]+/g, " ")
+    .replace(/\b\w/g, ch => ch.toUpperCase());
+}
+
+async function discoverJsonFiles() {
+  const response = await fetch("./");
+  if (!response.ok) throw new Error("Directory listing not available");
+  const html = await response.text();
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  const files = Array.from(doc.querySelectorAll("a"))
+    .map(a => a.getAttribute("href") || "")
+    .map(href => decodeURIComponent(href.split("?")[0]))
+    .filter(href => href.toLowerCase().endsWith(".json"))
+    .map(href => href.replace(/^\.?\//, ""))
+    .filter(href => !href.includes("/"))
+    .filter(file => file.toLowerCase() !== "datasets.json");
+
+  const unique = Array.from(new Set(files));
+  if (!unique.length) throw new Error("No JSON files found in directory listing");
+  return unique.map(file => ({ file, label: labelFromFilename(file) }));
+}
+
+async function init() {
+  let manifest;
+  try {
+    manifest = await discoverJsonFiles();
+  } catch (error) {
+    showLoadError(new Error("Could not list JSON files automatically. Serve this folder with a web server that supports directory listing (e.g. `python3 -m http.server`) and open it via http://, not file://."));
+    console.error(error);
+    return;
+  }
+
+  populateDatasetPicker(manifest);
+  try {
+    await loadDataset(manifest[0].file);
+  } catch (error) {
+    showLoadError(error);
+  }
+}
+
+init();
+</script>
+
+
+<!-- https://data.nsonepal.gov.np/dataset/province-level_individual/resource/8e55bd79-8567-4dd1-a5d0-d88604bad749 -->
+</body>
+</html>
